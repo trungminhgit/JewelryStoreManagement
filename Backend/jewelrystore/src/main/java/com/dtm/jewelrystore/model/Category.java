@@ -39,7 +39,7 @@ public class Category {
     @Column(name = "category_id")
     private Long categoryID;
     
-    @Column(name = "category_name")
+    @Column(name = "categoty_name")
     private String categoryName;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

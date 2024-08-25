@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -40,32 +42,35 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long productID;
-    
+
     @Column(name = "product_name")
     private String productName;
-    
+
     @Column(name = "price")
     private Long price;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "product_image")
     private String productImage;
-    
+
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     @ManyToOne(optional = false)
     private Category category;
-    
+
     @JoinColumn(name = "material_id", referencedColumnName = "material_id")
     @ManyToOne(optional = false)
     private Material material;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonIgnore
     private Set<ReceiptDetail> listReceiptDetails = new HashSet<>();
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonIgnore
     private Set<Comment> listComments = new HashSet<>();
+
+    @Transient
+    private MultipartFile file;
 }
