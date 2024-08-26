@@ -48,7 +48,10 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(path = "/register")
+    @PostMapping(path = "/register", consumes = {
+        MediaType.MULTIPART_FORM_DATA_VALUE,
+        MediaType.APPLICATION_JSON_VALUE
+    })
     public ResponseData<?> register(@RequestBody @Valid UserRequestDTO userRequest) {
         try {
 
@@ -118,6 +121,7 @@ public class UserController {
     public ResponseData<?> getAllUsers(@RequestParam(defaultValue = "0", required = false) int pageNo,
             @Min(10) @RequestParam(defaultValue = "20", required = false) int pageSize) {
         try {
+            log.info("Request get all users");
             PageResponse<?> users = userService.getAllUsers(pageNo, pageSize);
             return new ResponseData<>(HttpStatus.OK.value(), "Get list users successfully", users);
         } catch (Exception e) {
@@ -125,6 +129,7 @@ public class UserController {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Get list users failed");
         }
     }
+//----------------------------------------Cần sửa lại------------------------
 
     @GetMapping("/search")
     public ResponseData<?> getUserByParam(@RequestParam Map<String, String> params,

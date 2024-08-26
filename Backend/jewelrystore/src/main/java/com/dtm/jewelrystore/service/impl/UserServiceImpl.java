@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
                 .phone(user.getPhone())
                 .avatar(user.getAvatar())
                 .build();
+        
     }
 
     @Override

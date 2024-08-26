@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2024 at 03:50 AM
+-- Generation Time: Aug 26, 2024 at 01:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -93,6 +93,18 @@ CREATE TABLE `product` (
   `material_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `product_name`, `price`, `description`, `product_image`, `category_id`, `material_id`) VALUES
+(1, 'Nhẫn vàng SJC', 2000000, 'Nhẫn cưới trong bộ sưu tập Thu - Đông', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724661671/fxnhu75xt6mmmlpnbrxm.png', 1, 1),
+(2, 'Vòng vàng SJC', 3000000, 'Vòng tay thiết kế Jewelrey', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724662469/w9y9rwitllqrg8imulle.png', 3, 1),
+(3, 'Dây chuyền WNC', 5000000, 'Dây chuyền trong bộ sưu tập Tết 2024', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724662566/xisr0mlnt3y1v4dwiwpj.png', 2, 1),
+(4, 'Vòng tay CIRILA', 1000000, 'Vòng tay bạc thiết kế CIRILA', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724662679/rgf2agnlrd9omf8mfcrh.png', 3, 2),
+(5, 'Lắc tay SILVER ', 1000000, 'Lắc tay thiết kế Jewelry', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724662827/wlnqjkky6l0brncnwxdo.png', 4, 2),
+(6, 'Bông tai Platinum MBL', 1500000, 'Bông tai Platinum thuộc bộ sưu tập Xuân - Hè ', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724666749/oy21ubzvqr6hu2cih85d.png', 5, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -152,11 +164,20 @@ CREATE TABLE `user` (
   `last_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `phone`, `avatar`, `create_date`, `update_date`, `role_id`) VALUES
+(1, 'dangtrungminh', '123456789', 'Minh', 'Đặng Trung', 'dangtrungminh@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2),
+(18, 'admin', '123456789', 'Admin', 'Admin', 'admin@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 1),
+(19, 'user1', '123456789', 'User1', 'User1', 'user1@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2);
 
 --
 -- Indexes for dumped tables
@@ -244,7 +265,7 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `receipt`
@@ -268,7 +289,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
