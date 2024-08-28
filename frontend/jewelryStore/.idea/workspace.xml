@@ -1,64 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72912dd8-cda6-4e61-849a-4ca8d9f3fb52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/CardProduct.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CardSpecialProduct.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/CartItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Sidebar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helper/APIs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Cart.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Home2.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/JewelrystoreApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/configuration/AppConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/configuration/CloudinaryConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/controller/CategoryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/controller/MaterialController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/controller/ProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/request/ProductRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/request/UserRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/response/PageResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/response/ProductDetailResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/response/ResponseData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/response/ResponseError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/dto/response/UserDetailResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/exception/InvalidDataException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/exception/ResourceNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Comment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Material.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Product.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Receipt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/ReceiptDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/CategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/MaterialRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/ProductRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/repository/UserSearchReposiroty.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/CategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/MaterialService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/ProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/impl/CategoryServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/impl/MaterialServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/impl/ProductServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/service/impl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/test/java/com/dtm/jewelrystore/JewelrystoreApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" />
-    </list>
+    <list default="true" id="72912dd8-cda6-4e61-849a-4ca8d9f3fb52" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,9 +17,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2lIrZhjd4aD7Otteco10gwH1el0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -85,10 +28,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "nguyenminh",
     "last_opened_file_path": "/home/minh-nguyen/react_projects/JewelryStoreManagement/frontend/jewelryStore",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -109,6 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724878488353</updated>
       <workItem from="1724878489418" duration="107000" />
+      <workItem from="1724887136860" duration="314000" />
     </task>
     <servers />
   </component>
