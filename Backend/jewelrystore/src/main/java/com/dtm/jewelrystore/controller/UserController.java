@@ -12,19 +12,14 @@ import com.dtm.jewelrystore.dto.response.UserDetailResponse;
 import com.dtm.jewelrystore.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
-import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.PartitionKey;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,6 +51,7 @@ public class UserController {
         try {
 
             long result = userService.saveUser(userRequest);
+            log.info("Result: {}",result);
             if (result != -1) {
                 log.info("Request add user, {} {}", userRequest.getFirstName(), userRequest.getLastName());
                 return new ResponseData<>(HttpStatus.CREATED.value(), "Add user successfully", result);

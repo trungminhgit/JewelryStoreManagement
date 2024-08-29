@@ -9,6 +9,7 @@ import com.dtm.jewelrystore.dto.response.PageResponse;
 import com.dtm.jewelrystore.dto.response.UserDetailResponse;
 import com.dtm.jewelrystore.model.User;
 import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -17,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UserService {
 
-    //UserDetailsService userDetailsService();
-    //User getByUsername(String userName);
+    UserDetailsService userDetailsService();
+
+    User getByUsername(String userName);
+    
     long saveUser(UserRequestDTO request);
 
     void updateAvatar(long userID, MultipartFile avatar);

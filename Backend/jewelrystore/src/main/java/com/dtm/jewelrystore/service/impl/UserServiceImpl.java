@@ -23,8 +23,12 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,25 +46,28 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final UserSearchReposiroty userSearch;
 
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        return username -> userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//    }
-//
-//    @Override
-//    public User getByUsername(String userName) {
-//        return userRepository.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//    }
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
+    public User getByUsername(String userName) {
+        return userRepository.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
     @Override
     public long saveUser(UserRequestDTO request) {
         Optional<User> oUser = userRepository.findByUsername(request.getUsername());
-        if (oUser != null) {
+        if (oUser.isPresent()) {
             return -1;
         }
         Role role = roleRepository.findById((long) 2).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
         User user = User.builder()
                 .username(request.getUsername())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -101,7 +108,7 @@ public class UserServiceImpl implements UserService {
                 .phone(user.getPhone())
                 .avatar(user.getAvatar())
                 .build();
-        
+
     }
 
     @Override
