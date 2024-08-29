@@ -46,14 +46,16 @@ public class AppConfig {
                 .requestMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(HttpMethod.POST, "/api/product/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/product/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                .requestMatchers("/api/revenue/**").hasAuthority("ROLE_ADMIN")
+                
                 .requestMatchers(
                         "/api/auth/**",
                         "/api/user/register",
                         "/api/category/**",
                         "/api/material/**",
                         "/api/product/list-product",
-                        "/api/product/{productID}").permitAll())
+                        "/api/product/{productID}").permitAll()
+                .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(preFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
