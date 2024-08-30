@@ -4,7 +4,7 @@
  */
 package com.dtm.jewelrystore.repository;
 
-import com.dtm.jewelrystore.model.Product;
+import com.dtm.jewelrystore.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author ACER
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-
-    Product findByProductName(String categoryName);
-
-    Product findByProductID(Long productID);
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 }
