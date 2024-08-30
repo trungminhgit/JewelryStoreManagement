@@ -209,9 +209,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `phone`, `avatar`, `create_date`, `update_date`, `role_id`) VALUES
-(1, 'dangtrungminh', '123456789', 'Minh', 'Đặng Trung', 'dangtrungminh@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2),
-(18, 'admin', '123456789', 'Admin', 'Admin', 'admin@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 1),
-(19, 'user1', '123456789', 'User1', 'User1', 'user1@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2);
 (1, 'dangtrungminh', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'Minh', 'Tran van', 'tranvanminh@gmail.com', '1234567890', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-27 17:52:46', 2),
 (18, 'admin', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'Admin', 'Admin', 'admin@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 1),
 (19, 'user1', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'User1', 'User1', 'user1@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2),
