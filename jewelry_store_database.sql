@@ -4,6 +4,7 @@
 --
 -- Host: 127.0.0.1
 -- Generation Time: Aug 26, 2024 at 01:11 PM
+-- Generation Time: Aug 30, 2024 at 02:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -56,6 +57,14 @@ CREATE TABLE `comment` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `description`, `create_date`, `user_id`, `product_id`) VALUES
+(2, 'Sản phẩm đẹp, giá cả hợp lý.', '2024-08-29 19:29:37', 20, 1),
+(3, 'Sản phẩm rất tốt, sẽ quay lại ủng hộ.', '2024-08-29 19:30:49', 19, 1);
 
 -- --------------------------------------------------------
 
@@ -117,6 +126,15 @@ CREATE TABLE `receipt` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `receipt`
+--
+
+INSERT INTO `receipt` (`receipt_id`, `create_date`, `user_id`) VALUES
+(2, '2024-08-29 14:43:22', 18),
+(3, '2024-08-29 14:52:46', 20),
+(4, '2024-08-29 14:54:52', 20);
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +148,22 @@ CREATE TABLE `receipt_detail` (
   `product_id` int(11) NOT NULL,
   `receipt_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `receipt_detail`
+--
+
+INSERT INTO `receipt_detail` (`receipt_detail_id`, `price`, `quantity`, `product_id`, `receipt_id`) VALUES
+(1, 4000000, 2, 1, 2),
+(2, 3000000, 1, 2, 2),
+(3, 5000000, 1, 3, 2),
+(4, 4000000, 2, 1, 3),
+(5, 3000000, 1, 2, 3),
+(6, 5000000, 1, 3, 3),
+(7, 2000000, 2, 4, 4),
+(8, 3000000, 3, 5, 4),
+(9, 1500000, 1, 6, 4);
+
 
 -- --------------------------------------------------------
 
@@ -178,6 +212,10 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `first_name`, `last_name`
 (1, 'dangtrungminh', '123456789', 'Minh', 'Đặng Trung', 'dangtrungminh@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2),
 (18, 'admin', '123456789', 'Admin', 'Admin', 'admin@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 1),
 (19, 'user1', '123456789', 'User1', 'User1', 'user1@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2);
+(1, 'dangtrungminh', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'Minh', 'Tran van', 'tranvanminh@gmail.com', '1234567890', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-27 17:52:46', 2),
+(18, 'admin', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'Admin', 'Admin', 'admin@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 1),
+(19, 'user1', '$2a$12$wT6UpG5HsJ1lbPvzDmDuw.RkOxlJYT6DUzJy7q4EYsYhXeL0ZEKjO', 'User1', 'User1', 'user1@gmail.com', '0123456789', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724342853/am7tgtdyffzlri2vqxjk.png', '2024-08-22 23:07:34', '2024-08-22 23:07:34', 2),
+(20, 'dangtrunglong', '$2a$10$6hfR4IEnUnTTDdgAzhGKfup9JKepC0Dx8jPwQVDNXj2MupyUk2Qhq', 'Long', 'Dang Trung', 'dangtrunglon@gmail.com', '1234567890', 'https://res.cloudinary.com/dchkh7d18/image/upload/v1724756296/xuzunub2u6upzekhmust.png', '2024-08-27 17:25:14', '2024-08-27 17:58:17', 2);
 
 --
 -- Indexes for dumped tables
@@ -253,7 +291,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `material`
@@ -271,13 +309,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `receipt`
 --
 ALTER TABLE `receipt`
-  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `receipt_detail`
 --
 ALTER TABLE `receipt_detail`
-  MODIFY `receipt_detail_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `receipt_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -289,7 +327,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
