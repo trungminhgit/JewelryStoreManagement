@@ -4,11 +4,15 @@
  */
 package com.dtm.jewelrystore.controller;
 
+import com.dtm.jewelrystore.dto.request.CommentRequestDTO;
 import com.dtm.jewelrystore.dto.request.ProductRequestDTO;
+import com.dtm.jewelrystore.dto.response.CommentResponse;
 import com.dtm.jewelrystore.dto.response.PageResponse;
 import com.dtm.jewelrystore.dto.response.ProductDetailResponse;
 import com.dtm.jewelrystore.dto.response.ResponseData;
 import com.dtm.jewelrystore.dto.response.ResponseError;
+import com.dtm.jewelrystore.model.Comment;
+import com.dtm.jewelrystore.service.CommentService;
 import com.dtm.jewelrystore.service.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -44,6 +49,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductController {
 
     private final ProductService productService;
+    private final CommentService commentService;
 
     @PostMapping(path = "/add-product", consumes = {
         MediaType.MULTIPART_FORM_DATA_VALUE
@@ -111,6 +117,35 @@ public class ProductController {
         } catch (Exception e) {
             log.error("Get all products failed, error message = {}", e.getMessage(), e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Get all products failed");
+        }
+    }
+
+    @GetMapping("/comments/{productID}")
+    public ResponseData<?> getListComments(@PathVariable @Min(1) long productID) {
+        try {
+            log.info("Request get list comments, productID = {}", productID);
+            List<CommentResponse> listComments = commentService.getListComments(productID);
+            if (!listComments.isEmpty()) {
+                return new ResponseData<>(HttpStatus.OK.value(), "Get list comments successfully", listComments);
+            } else {
+                log.info("There are no comment for this product, productID = {}", productID);
+                return new ResponseData<>(HttpStatus.OK.value(), "There are no comment for this product");
+            }
+        } catch (Exception e) {
+            log.error("Get list comments failed, error message = {}", e.getMessage(), e.getCause());
+            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Get list comments failed");
+        }
+    }
+
+    @PostMapping("/add-comment/{productID}")
+    public ResponseData<?> addComment(@RequestBody @Valid CommentRequestDTO request, @PathVariable @Min(1) long productID) {
+        try {
+            log.info("Request add comment for product, productID = {}", productID);
+            long commentID = commentService.addComment(productID, request);
+            return new ResponseData<>(HttpStatus.CREATED.value(), "Add comment successfully", commentID);
+        } catch (Exception e) {
+            log.error("Add comment failed, error message = {}", e.getMessage(), e.getCause());
+            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Add comment failed");
         }
     }
 }
