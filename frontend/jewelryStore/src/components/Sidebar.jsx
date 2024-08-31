@@ -1,7 +1,33 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
+import {authApi, endpoints} from "../helper/APIs.js";
+import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
+import {userContext} from "../helper/Context.js";
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = React.useState(false);
+    const {dispatch} = useContext(userContext)
+    const navigate = useNavigate();
+    const [userName, setUserName] = React.useState("");
+    const [userId, setUserId] = React.useState("");
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            const token = Cookies.get("token");
+            console.log(token)
+            const response = await authApi(token).get(endpoints["current-user"])
+            setUserName(response.data.data.username)
+            setUserId(response.data.data.userID)
+        }
+        fetchCurrentUser()
+    }, []);
+
+    const logout = () =>{
+        dispatch({
+            type:"logout"
+        })
+
+    }
+
     return (
         <div className="bg-black">
             <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
@@ -116,7 +142,8 @@ export default function Sidebar() {
                                      src="https://plus.unsplash.com/premium_photo-1689551670902-19b441a6afde?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                      alt="Rounded avatar"/>
                                 <section className="text-left">
-                                    <h4 className="text-md">User name</h4>
+                                    <h4 className="text-md">{userName}</h4>
+                                    {!userName&&<h4 className="text-md">None</h4>}
                                 </section>
                             </section>
                             <div>
@@ -130,7 +157,9 @@ export default function Sidebar() {
                             {isOpen &&
                                 <ul
                                     className="mt-1 absolute p-2 pl-0 left-0 right-0 top-full w-full bg-white shadow-lg rounded-sm">
-                                    <li className="mb-1">
+                                    <li onClick={()=>{
+                                        userId&&navigate("users/"+userId)
+                                    }} className="mb-1">
                                         <a href="" className="px-2 py-1 hover:bg-gray-100 flex gap-3">
                                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -145,6 +174,7 @@ export default function Sidebar() {
                                     </li>
                                     <li className="mb-1">
                                         <a href=""
+                                           onClick={logout}
                                            className="px-2 py-1 hover:bg-gray-100 flex gap-3">
                                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"

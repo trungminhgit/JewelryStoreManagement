@@ -15,13 +15,16 @@ export const standardApi = ()=> {
         baseURL: BASE_URL,
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer `
         }
     })}
 export const endpoints = {
     "users":"/user/list",
     "user":(id)=>"/user/"+id,
-    "updateAvatar":(id)=>"/user/"+id+"/avatar",
+    "update-avatar":(id)=>"/user/"+id+"/avatar",
     "register": "/user/register",
     "login":"/auth/login",
-    "current-user":"/user/current-user"
+    "current-user":"/user/current-user",
+    "products":"/product/list-product",
+    "user-search":(keyword) => `/user/search?firstName=${keyword}`
 }
