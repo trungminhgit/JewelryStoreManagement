@@ -9,9 +9,11 @@ import com.dtm.jewelrystore.dto.response.PageResponse;
 import com.dtm.jewelrystore.dto.response.ResponseData;
 import com.dtm.jewelrystore.dto.response.ResponseError;
 import com.dtm.jewelrystore.dto.response.UserDetailResponse;
+import com.dtm.jewelrystore.model.User;
 import com.dtm.jewelrystore.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import java.security.Principal;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +53,7 @@ public class UserController {
         try {
 
             long result = userService.saveUser(userRequest);
-            log.info("Result: {}",result);
+            log.info("Result: {}", result);
             if (result != -1) {
                 log.info("Request add user, {} {}", userRequest.getFirstName(), userRequest.getLastName());
                 return new ResponseData<>(HttpStatus.CREATED.value(), "Add user successfully", result);
@@ -125,13 +127,24 @@ public class UserController {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Get list users failed");
         }
     }
-//----------------------------------------Cần sửa lại------------------------
 
     @GetMapping("/search")
-    public ResponseData<?> getUserByParam(@RequestParam Map<String, String> params,
+    public ResponseData<?> getUserByFirst(@RequestParam String firstName,
             @RequestParam(defaultValue = "0", required = false) int pageNo,
             @Min(10) @RequestParam(defaultValue = "20", required = false) int pageSize) {
-        log.info("Request search user by params");
-        return new ResponseData<>(HttpStatus.OK.value(), "Search user by params successfully", userService.searchUsers(params, pageNo, pageSize));
+        log.info("Request search user by first name");
+        return new ResponseData<>(HttpStatus.OK.value(), "Search user by params successfully", userService.searchUsers(firstName, pageNo, pageSize));
+    }
+
+    @GetMapping(path = "/current-user", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseData<?> getCurrentUser(Principal request) {
+        try {
+            log.info("Request get current user, username = {}", request.getName());
+            User user = userService.getByUsername(request.getName());
+            return new ResponseData<>(HttpStatus.OK.value(), "Get current user successfully", user);
+        } catch (Exception e) {
+            log.error("Get current user failed, error message = {}", e.getMessage(), e.getCause());
+            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Get current user failed");
+        }
     }
 }

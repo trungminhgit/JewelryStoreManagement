@@ -45,7 +45,9 @@ public class AppConfig {
                 .requestMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .requestMatchers(HttpMethod.POST, "/api/product/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/product/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/api/revenue/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers(
+                        "/api/revenue/**",
+                        "/api/user/search").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(
                         "/api/auth/**",
                         "/api/user/register",
@@ -53,7 +55,8 @@ public class AppConfig {
                         "/api/material/**",
                         "/api/product/list-product",
                         "/api/product/{productID}",
-                        "/api/product/comments/{productID}").permitAll()
+                        "/api/product/comments/{productID}",
+                        "/api/product/search-product").permitAll()
                 .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(preFilter, UsernamePasswordAuthenticationFilter.class);
@@ -78,8 +81,8 @@ public class AppConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("**")
-                        .allowedOrigins("http://localhost:3306")
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3306","http://localhost:3308","http://localhost:5174")
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed HTTP methods
                         .allowedHeaders("*") // Allowed request headers
                         .allowCredentials(false)
