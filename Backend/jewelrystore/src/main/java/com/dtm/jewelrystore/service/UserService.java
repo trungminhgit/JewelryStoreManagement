@@ -34,6 +34,6 @@ public interface UserService {
 
     PageResponse<?> getAllUsers(int pageNo, int pageSize);
 
-    PageResponse<User> searchUsers(Map<String, String> params, int pageNo, int pageSize);
+    PageResponse<?> searchUsers(String firstName, int pageNo, int pageSize);
 
 }
