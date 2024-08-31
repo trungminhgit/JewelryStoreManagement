@@ -7,6 +7,7 @@ package com.dtm.jewelrystore.service;
 import com.dtm.jewelrystore.dto.request.ProductRequestDTO;
 import com.dtm.jewelrystore.dto.response.PageResponse;
 import com.dtm.jewelrystore.dto.response.ProductDetailResponse;
+import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -26,4 +27,6 @@ public interface ProductService {
     PageResponse<?> getAllProducts(int pageNo, int pageSize);
     
     //Search by params
+    
+    PageResponse<?> searchProductByParams(Map<String, String> params, int pageNo, int pageSize);
 }

@@ -18,6 +18,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.websocket.server.PathParam;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.PartitionKey;
@@ -147,5 +148,13 @@ public class ProductController {
             log.error("Add comment failed, error message = {}", e.getMessage(), e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Add comment failed");
         }
+    }
+
+    @GetMapping(path = "/search-product")
+    public ResponseData<?> searchProductByParams(@RequestParam(defaultValue = "0", required = false) int pageNo,
+            @Min(10) @RequestParam(defaultValue = "20", required = false) int pageSize,
+            @RequestParam(required = false) Map<String, String> params) {
+        log.info("Price, {}",params.get("price"));
+        return new ResponseData<>(HttpStatus.OK.value(), "Search product successfully", productService.searchProductByParams(params, pageNo, pageSize));
     }
 }
