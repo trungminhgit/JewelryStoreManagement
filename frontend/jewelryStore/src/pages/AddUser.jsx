@@ -4,10 +4,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import {endpoints, standardApi} from "../helper/APIs.js";
 import {userContext} from "../helper/Context.js";
 import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
-export default function addUser() {
+export default function AddUser() {
     const [open, setOpen] = useState(false);
-    const {dispatch} = useContext(userContext)
+    const {userDispatch} = useContext(userContext)
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -15,15 +16,24 @@ export default function addUser() {
     const [phone, setPhone] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [avatarFile, setAvatarFile]=useState(null)
+
 
     const register = async () => {
+        if(avatarFile !== null){
+            const _data = new FormData()
+            _data.append('avatar', avatarFile)
+        }
+
+
+
         const data = {
             "username":username,
             "password":password,
             "firstName":firstName,
             "lastName":lastName,
             "email":email,
-            "phone":phone
+            "phone":phone,
         }
             console.log(data)
             // const response = await standardApi().get(endpoints["products"])
@@ -32,13 +42,13 @@ export default function addUser() {
             if(response.data.status===201){
                 console.log(response.data)
                 console.log(response)
-                dispatch({
+                userDispatch({
                     type:"register",
                     payload:{
-                        message:"Add user successfully"
+                        message:response.data.message
                     }
                 })
-                navigate("/")
+                navigate(-1)
             }
         }
 
@@ -106,12 +116,21 @@ export default function addUser() {
                                    onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
+                        <div className="mb-4">
+                            <label className="mb-2 inline-block" htmlFor="password">Password</label>
+                            <input type="password" id="password"
+                                   className="w-full border border-black p-4 rounded-md"
+                                   placeholder="Password"
+                                   value={avatarFile}
+                                   onChange={(e) => setAvatarFile(e.target.files[0])}
+                            />
+                        </div>
                         <div className="mb-4 flex gap-4">
                             <button onClick={register}
                                     className="bg-purple-400 text-white px-4 py-2 rounded-md">Sign in
                             </button>
                             <button
-                                onClick={()=>history.back()}
+                                onClick={() => history.back()}
                                 className="bg-white border border-black text-black px-4 py-2 rounded-md">Cancel
                             </button>
                         </div>

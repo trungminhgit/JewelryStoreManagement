@@ -25,6 +25,13 @@ export const endpoints = {
     "register": "/user/register",
     "login":"/auth/login",
     "current-user":"/user/current-user",
-    "products":"/product/list-product",
-    "user-search":(keyword) => `/user/search?firstName=${keyword}`
+    "categories":"/category/list-categories",
+    "materials":"/material/list-materials",
+    "products":(pageNo)=>"/product/list-product?pageNo="+pageNo,
+    "product-add":"product/add-product",
+    "product":(id)=>"/product/"+id,
+    "comments":(productId)=>"/product/comments/"+productId,
+    "comment-add":(productId)=>"/product/add-comment/"+productId,
+    "user-search":(keyword) => `/user/search?firstName=${keyword}`,
+    "product-search":(keyword) => `/product/search-product?productName=${keyword}`,
 }

@@ -19,3 +19,21 @@ export const userReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export const productInitState = {
+    productName: null,
+    message:null
+}
+
+export const productReducer = (state = productInitState, action) => {
+    switch (action.type){
+        case 'add':
+            return action.payload;
+        case 'edit':
+            return action.payload;
+        case 'delete':
+            return action.payload;
+        default:
+            return state
+    }
+}

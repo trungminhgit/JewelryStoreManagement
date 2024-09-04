@@ -8,7 +8,7 @@ import {toast, ToastContainer} from "react-toastify";
 
 export default function Users() {
     const [open, setOpen] = React.useState(false);
-    const {user, dispatch} = useContext(userContext)
+    const {user, userDispatch} = useContext(userContext)
     const navigate = useNavigate()
     const [users, setUsers] = React.useState([])
     const [paginates, setPaginates] = React.useState(0)
@@ -33,7 +33,7 @@ export default function Users() {
         const response = await authApi(token).delete(endpoints["user"](id));
         console.log(response)
         if(response.data.status===204){
-            dispatch({
+            userDispatch({
                 type:"delete",
                 payload:{
                     message:response.data.message,

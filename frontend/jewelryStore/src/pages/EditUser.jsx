@@ -8,7 +8,7 @@ import {userContext} from "../helper/Context.js";
 export default function EditUser() {
     const {id} = useParams();
     const [open, setOpen] = React.useState(false);
-    const {dispatch} = useContext(userContext);
+    const {userDispatch} = useContext(userContext);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ export default function EditUser() {
                     'Content-Type': 'multipart/form-data',
                 }
             });
-            dispatch({
+            userDispatch({
                 type:"change",
                 payload:{
                     message:response.data.message,
@@ -46,13 +46,14 @@ export default function EditUser() {
         const response = await authApi(token).put(endpoints["user"](id), data)
         if(response.data.status===202){
             console.log(response.data)
-            dispatch({
+            userDispatch({
                 type:"change",
                 payload:{
                     message:response.data.message,
                 }
             })
-            navigate("/")
+            navigate(-1)
+
         }
     }
 
