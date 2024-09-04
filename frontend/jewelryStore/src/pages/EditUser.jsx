@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar.jsx";
 import React, {useContext, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
-import {authApi, endpoints} from "../helper/APIs.js";
+import {authApi, endpoints, standardApi} from "../helper/APIs.js";
 import {userContext} from "../helper/Context.js";
 
 export default function EditUser() {
@@ -14,6 +14,8 @@ export default function EditUser() {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const navigate = useNavigate()
+    const [avatarURL, setAvatarURL] = useState("");
+    const [avatarFile, setAvatarFile] = useState(null)
 
     const update = async ()=>{
         const data = {
@@ -24,6 +26,23 @@ export default function EditUser() {
         }
         const token = Cookies.get("token");
         console.log(token)
+        if(avatarFile !== null){
+            console.log(avatarFile)
+            const _data = new FormData();
+            _data.append("avatar", avatarFile);
+            const response = await authApi(token).put(endpoints["update-avatar"](id),_data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            dispatch({
+                type:"change",
+                payload:{
+                    message:response.data.message,
+                }
+            })
+
+        }
         const response = await authApi(token).put(endpoints["user"](id), data)
         if(response.data.status===202){
             console.log(response.data)
@@ -37,6 +56,7 @@ export default function EditUser() {
         }
     }
 
+
     useEffect(() => {
         const fetchUserById = async () => {
             const token = Cookies.get('token');
@@ -47,6 +67,7 @@ export default function EditUser() {
                 setLastName(response.data.data.lastName)
                 setPhone(response.data.data.phone)
                 setEmail(response.data.data.email)
+                setAvatarURL(response.data.data.avatar)
             }
         }
         fetchUserById()
@@ -97,6 +118,17 @@ export default function EditUser() {
                                    onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
+                        <div></div>
+                        <div className="mb-4">
+                            <img src={avatarURL} className="w-full p-4 rounded-md"/>
+                        </div>
+                        <div className="mb-4">
+                            <input type="file" className="mb-4" onChange={(e) => {
+                                setAvatarFile(e.target.files[0])
+                                console.log(e.target.files[0])
+                            }}/>
+                        </div>
+
                         <div className="mb-4 flex gap-2">
                             <input onClick={update} type="button" value="Update"
                                    className=" text-white p-3 rounded-md border border-purple-500 bg-purple-500"/>

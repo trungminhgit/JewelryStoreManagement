@@ -19,12 +19,12 @@ export default function Users() {
         console.log(response.data.data);
         setUsers(response.data.data.items);
     }
-    const fetchUsers = async ()=>{
+    const fetchUsers = async (pageNo = 0)=>{
         const token = Cookies.get("token");
-        const response = await authApi(token).get(endpoints["users"])
+        const response = await authApi(token).get(endpoints["users"](pageNo));
         setUsers(response.data.data.items)
         setPaginates(response.data.data)
-        console.log(response.data.data)
+        console.log("user ",response.data.data)
         const arr = response.data.data
         console.log(arr.items.map(item => item.phone))
     }
@@ -44,8 +44,14 @@ export default function Users() {
         }
     }
 
+    const length = paginates.totalPage; // Length of the array
+    const array = Array.from({ length }, (_, index) => index);
+
+
+
     useEffect(() => {
         fetchUsers();
+        console.log("message",user.message)
         user.message&&toast.success(user.message)
     }, [])
     return (
@@ -53,7 +59,7 @@ export default function Users() {
             <ToastContainer position="top-right"/>
             <Sidebar />
             <main className="h-screen p-4 sm:ml-64 bg-gray-100">
-                <section className="mx-auto text-center w-5/6">
+                <section className="p-4">
                     <section className="mb-12">
                         <h1 className="text-4xl">Tiêu đề</h1>
                     </section>
@@ -117,7 +123,7 @@ export default function Users() {
                                         <td onClick={() => setOpen(!open)}
                                             className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
                                             <p onClick={
-                                                () => navigate("users/" + user.userID)
+                                                () => navigate("/users/" + user.userID)
                                             }
                                                className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
                                             <p onClick={() => {
@@ -132,10 +138,18 @@ export default function Users() {
                             </tbody>
                         </table>
                     </div>
-                    <div className="flex justify-center gap-2">
-                        <div className="p-3 bg-black text-white rounded-md">1</div>
-                        <div className="p-3 bg-black text-white rounded-md">2</div>
-                        <div className="p-3 bg-black text-white rounded-md">3</div>
+                    <div className="flex justify-center gap-2 py-8">
+                        {array.map((item, index) => {
+                            if(index===paginates.pageNo)
+                                return <div key={index} onClick={()=>{
+                                    fetchUsers(index)
+                                }} className="text-white bg-orange-500 p-3 px-4 rounded-lg cursor-pointer">{index+1}</div>
+                            else
+                                return <div key={index} onClick={()=>{
+                                    fetchUsers(index)
+                                }} className="text-white bg-black p-3 px-4 rounded-lg cursor-pointer">{index+1}</div>
+                        })}
+
                     </div>
                 </section>
             </main>

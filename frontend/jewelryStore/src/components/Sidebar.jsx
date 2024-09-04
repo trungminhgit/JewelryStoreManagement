@@ -36,7 +36,7 @@ export default function Sidebar() {
                 <span className="sr-only">Open sidebar</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
-                    <path clip-rule="evenodd" fill-rule="evenodd"
+                    <path clipRule="evenodd" fillRule="evenodd"
                           d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                 </svg>
             </button>
@@ -50,7 +50,7 @@ export default function Sidebar() {
                     <span className="sr-only">Open sidebar</span>
                     <svg className="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                               d="M6 18 17.94 6M18 18 6.06 6"/>
                     </svg>
 
@@ -68,10 +68,10 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z"/>
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2" d="M10 6.025A7.5 7.5 0 1 0 17.975 14H10V6.025Z"/>
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2"
                                           d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z"/>
                                 </svg>
 
@@ -84,7 +84,7 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeWidth="2"
                                           d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                 </svg>
 
@@ -97,7 +97,7 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeWidth="2"
                                           d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                                 </svg>
 
@@ -111,8 +111,8 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2"
                                           d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
                                 </svg>
 
@@ -126,8 +126,8 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2"
                                           d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
                                 </svg>
 
@@ -150,8 +150,8 @@ export default function Sidebar() {
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white " aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="m19 9-7 7-7-7"/>
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2" d="m19 9-7 7-7-7"/>
                                 </svg>
                             </div>
                             {isOpen &&
@@ -164,7 +164,7 @@ export default function Sidebar() {
                                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                                  viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2"
+                                                <path stroke="currentColor" strokeWidth="2"
                                                       d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                             </svg>
 
@@ -179,9 +179,9 @@ export default function Sidebar() {
                                             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                                  viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                      stroke-linejoin="round"
-                                                      stroke-width="2"
+                                                <path stroke="currentColor" strokeLinecap="round"
+                                                      strokeLinejoin="round"
+                                                      strokeWidth="2"
                                                       d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
                                             </svg>
                                             Logout
@@ -201,8 +201,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -210,8 +210,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -219,8 +219,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -229,8 +229,8 @@ export default function Sidebar() {
             {/*            <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"*/}
             {/*                     viewBox="0 0 18 18">*/}
-            {/*                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                          stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                          strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                </svg>*/}
             {/*            </p>*/}
             {/*        </div>*/}
@@ -239,8 +239,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -248,8 +248,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -257,8 +257,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -266,8 +266,8 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
@@ -276,8 +276,8 @@ export default function Sidebar() {
             {/*            <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"*/}
             {/*                     viewBox="0 0 18 18">*/}
-            {/*                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                          stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                          strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                </svg>*/}
             {/*            </p>*/}
             {/*        </div>*/}
@@ -286,29 +286,29 @@ export default function Sidebar() {
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"*/}
             {/*                         fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"*/}
-            {/*                              stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*                              strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
             {/*            <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">*/}
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
             {/*            <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">*/}
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}
             {/*            <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">*/}
             {/*                <p className="text-2xl text-gray-400 dark:text-gray-500">*/}
             {/*                    <svg className="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">*/}
-            {/*                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>*/}
+            {/*                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 1v16M1 9h16"/>*/}
             {/*                    </svg>*/}
             {/*                </p>*/}
             {/*            </div>*/}

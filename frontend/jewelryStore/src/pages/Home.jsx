@@ -20,15 +20,17 @@ export default function Home() {
         console.log(response.data.data);
         setUsers(response.data.data.items);
     }
-    const fetchUsers = async ()=>{
+    const fetchUsers = async (pageNo=0)=>{
         const token = Cookies.get("token");
-        const response = await authApi(token).get(endpoints["users"])
+        const response = await authApi(token).get(endpoints["users"](pageNo))
         setUsers(response.data.data.items)
         setPaginates(response.data.data)
         console.log(response.data.data)
         const arr = response.data.data
         console.log(arr.items.map(item => item.phone))
     }
+    const length = paginates.totalPage; // Length of the array
+    const array = Array.from({ length }, (_, index) => index);
     const del = async (id)=>{
         const token = Cookies.get("token");
         const response = await authApi(token).delete(endpoints["user"](id));
@@ -47,6 +49,7 @@ export default function Home() {
 
     useEffect(() => {
         fetchUsers();
+        console.log("message", user.message)
         user.message&&toast.success(user.message)
     }, [])
 
@@ -71,17 +74,20 @@ export default function Home() {
                         <div>
                             <input type="text" className="p-3 border border-black rounded-md text-lg"
                                    placeholder="keyword" value={keyword}
-                                   onChange={(e)=>setKeyword(e.target.value)}/>
-                            <button onClick={search} className="ml-3 bg-purple-500 p-3 text-white rounded-md text-lg">Search</button>
+                                   onChange={(e) => setKeyword(e.target.value)}/>
+                            <button onClick={search}
+                                    className="ml-3 bg-purple-500 p-3 text-white rounded-md text-lg">Search
+                            </button>
                         </div>
                         <div>
                             <button onClick={
-                                ()=>navigate("/users/add")
-                            } className="bg-purple-500 p-3 text-white rounded-md text-lg">Add</button>
+                                () => navigate("/users/add")
+                            } className="bg-purple-500 p-3 text-white rounded-md text-lg">Add
+                            </button>
                         </div>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="">
+                        <table className="w-full">
                             <thead>
                             <tr>
                                 <th className="p-2 px-10 text-xl text-left border-8 border-white bg-black text-white">Id</th>
@@ -98,7 +104,7 @@ export default function Home() {
                             </tr>
                             </thead>
                             <tbody>
-                            {users!==null && users.map((user, index) => {
+                            {users !== null && users.map((user, index) => {
                                 return (
                                     <tr key={index}>
                                         <td className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white">
@@ -124,11 +130,13 @@ export default function Home() {
                                         <td onClick={() => setOpen(!open)}
                                             className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
                                             <p onClick={
-                                                ()=>navigate("users/"+user.userID)
-                                            } className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
-                                            <p onClick={()=>{
+                                                () => navigate("/users/" + user.userID)
+                                            }
+                                               className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
+                                            <p onClick={() => {
                                                 del(user.userID)
-                                            }} className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
+                                            }}
+                                               className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
                                         </td>
                                     </tr>
                                 )
@@ -137,10 +145,19 @@ export default function Home() {
                             </tbody>
                         </table>
                     </div>
-                    <div className="flex justify-center gap-2">
-                        <div className="p-3 bg-black text-white rounded-md">1</div>
-                        <div className="p-3 bg-black text-white rounded-md">2</div>
-                        <div className="p-3 bg-black text-white rounded-md">3</div>
+                    <div className="flex justify-center gap-2 py-8">
+                        {array.map((item, index) => {
+                            if (index === paginates.pageNo)
+                                return <div key={index} onClick={() => {
+                                    fetchUsers(index)
+                                }}
+                                            className="text-white bg-orange-500 p-3 px-4 rounded-lg cursor-pointer">{index + 1}</div>
+                            else
+                                return <div key={index} onClick={() => {
+                                    fetchUsers(index)
+                                }} className="text-white bg-black p-3 px-4 rounded-lg cursor-pointer">{index + 1}</div>
+                        })}
+
                     </div>
                 </section>
             </main>

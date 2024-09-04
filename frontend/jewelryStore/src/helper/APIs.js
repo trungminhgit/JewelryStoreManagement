@@ -19,7 +19,7 @@ export const standardApi = ()=> {
         }
     })}
 export const endpoints = {
-    "users":"/user/list",
+    "users":(pageNo)=>`/user/list?pageNo=${pageNo}`,
     "user":(id)=>"/user/"+id,
     "update-avatar":(id)=>"/user/"+id+"/avatar",
     "register": "/user/register",
