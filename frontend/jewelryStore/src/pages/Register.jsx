@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Register() {
-    const {dispatch} = useContext(userContext)
+    const {userDispatch} = useContext(userContext)
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -32,8 +32,9 @@ export default function Register() {
             // const response = await standardApi().get(endpoints["products"])
             // console.log(response.data)
             const response = await standardApi().post(endpoints["register"], data)
-            if(response.status===200||response.status===201){
-                dispatch({
+            console.log(response)
+            if(response.data.status===201){
+                userDispatch({
                     type:"register",
                     payload:{
                         ...data,
@@ -42,6 +43,8 @@ export default function Register() {
                 })
                 console.log(response.data)
                 navigate("/login")
+            }else if (response.data.status===400){
+                toast.error(response.data.message)
             }
         }
 

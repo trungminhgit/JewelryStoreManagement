@@ -104,7 +104,7 @@ export default function Users() {
                                             {user.userID}
                                         </td>
                                         <td className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white">
-                                            <img src={user.avatar} className="size-12 mx-auto"/>
+                                            <img src={user.avatar?user.avatar:"../../public/ring.png"} className="size-12 mx-auto"/>
                                         </td>
                                         <td className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white">
                                             {user.firstName}

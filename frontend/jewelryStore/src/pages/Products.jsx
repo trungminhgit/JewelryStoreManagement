@@ -168,7 +168,7 @@ export default function Products() {
                             </div>
                         }
                     </div>
-                    {products.length > 0 &&
+                    {!loading&&products.length > 0 &&
                     <div className="flex justify-center gap-2 py-8">
                         {array.map((item, index) => {
                             if (index === paginates.pageNo)
@@ -184,7 +184,7 @@ export default function Products() {
 
                     </div>
 
-                }
+                    }
                 </section>
             </main>
         </>

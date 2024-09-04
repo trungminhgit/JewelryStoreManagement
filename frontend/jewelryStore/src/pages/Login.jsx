@@ -1,31 +1,40 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {userContext} from "../helper/Context.js";
 import {authApi, endpoints, standardApi} from "../helper/APIs.js";
 import {useNavigate} from "react-router-dom";
 import Cookies from 'js-cookie'
 import { ToastContainer, toast } from 'react-toastify';
+import * as response from "autoprefixer";
 
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
-    const {user} = useContext(userContext)
-    const [message, setMessage] = useState("")
+    const {user, userDispatch} = useContext(userContext)
     const login = async ()=>{
         const data={
             "username":username,
             "password":password
         }
         const response = await standardApi().post(endpoints["login"], data);
-        if(response.status === 200&&response.data.token){
+        if(response.data.token){
             console.log(response.data)
             Cookies.set("token", response.data.token);
             navigate("/");
         }else{
-            toast.error("invalid password")
+            toast.error("Invalid password")
         }
     }
-
+    useEffect(() => {
+        if(user.message)
+        {
+            toast.success(user.message)
+            userDispatch({
+                type:"delete",
+                payload:null
+            })
+        }
+    },[])
     return (
         <>
             <ToastContainer position="top-right"/>
@@ -34,9 +43,7 @@ export default function Login() {
                 <div className="mt-4">
                     <div className="bg-gradient-to-t from-yellow-300 to-purple-400 p-0.5 rounded-md">
                         <div className="bg-white p-4 rounded-md">
-                            {user.message && <div className="mb-4 bg-black text-white p-3 rounded-md">
-                                {user.message}
-                            </div>}
+
                             <div className="mb-4">
                                 <label className="mb-2 inline-block" htmlFor="username">Username</label>
                                 <input type="input" id="username" className="w-full border border-black p-4 rounded-md"

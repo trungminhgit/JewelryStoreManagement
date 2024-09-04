@@ -37,3 +37,25 @@ export const productReducer = (state = productInitState, action) => {
             return state
     }
 }
+
+export const cartInitState = {
+    cart:[]
+}
+
+export const cartReducer = (state = cartInitState, action) => {
+    switch (action.type){
+        case 'add':
+            const exitsItem = state.cart.find(item => item.id === action.payload.id)
+            if(exitsItem){
+                return {
+                    ...state,
+                    cart: state.cart.map(item => item.id === action.payload.id ? {...item, quantity:item.quantity+1} : item)
+                }
+            }else{
+                return {
+                    ...state,
+                    cart:[...state.cart,{...action.payload, quantity:1}]
+                }
+            }
+    }
+}

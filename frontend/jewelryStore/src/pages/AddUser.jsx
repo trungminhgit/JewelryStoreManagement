@@ -116,15 +116,6 @@ export default function AddUser() {
                                    onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <div className="mb-4">
-                            <label className="mb-2 inline-block" htmlFor="password">Password</label>
-                            <input type="password" id="password"
-                                   className="w-full border border-black p-4 rounded-md"
-                                   placeholder="Password"
-                                   value={avatarFile}
-                                   onChange={(e) => setAvatarFile(e.target.files[0])}
-                            />
-                        </div>
                         <div className="mb-4 flex gap-4">
                             <button onClick={register}
                                     className="bg-purple-400 text-white px-4 py-2 rounded-md">Sign in
