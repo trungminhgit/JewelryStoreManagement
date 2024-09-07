@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+-- Generation Time: Aug 26, 2024 at 01:11 PM
 -- Generation Time: Aug 30, 2024 at 02:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
@@ -162,6 +163,7 @@ INSERT INTO `receipt_detail` (`receipt_detail_id`, `price`, `quantity`, `product
 (7, 2000000, 2, 4, 4),
 (8, 3000000, 3, 5, 4),
 (9, 1500000, 1, 6, 4);
+
 
 -- --------------------------------------------------------
 
