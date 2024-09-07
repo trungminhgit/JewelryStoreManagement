@@ -43,19 +43,31 @@ export const cartInitState = {
 }
 
 export const cartReducer = (state = cartInitState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case 'add':
             const exitsItem = state.cart.find(item => item.id === action.payload.id)
-            if(exitsItem){
+            if (exitsItem) {
                 return {
                     ...state,
-                    cart: state.cart.map(item => item.id === action.payload.id ? {...item, quantity:item.quantity+1} : item)
+                    cart: state.cart.map(item => item.id === action.payload.id ? {
+                        ...item,
+                        quantity: item.quantity + 1
+                    } : item)
                 }
-            }else{
+            } else {
                 return {
                     ...state,
-                    cart:[...state.cart,{...action.payload, quantity:1}]
+                    cart: [...state.cart, {...action.payload, quantity: 1}]
                 }
             }
+        case "remove":
+            return {
+                ...state,
+                cart: state.cart.map(item=>{
+                    return item.id === action.payload.id && item.quantity>=1?{...item, quantity:item.quantity-1}:item
+                }).filter(item => item.quantity>0)
+            }
+
+
     }
 }

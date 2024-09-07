@@ -1,8 +1,11 @@
 import NavBar from "../components/NavBar.jsx";
 import CardSpecialProduct from "../components/CardSpecialProduct.jsx";
 import CardProduct from "../components/CardProduct.jsx";
+import {useContext} from "react";
+import {cartContext} from "../helper/Context.js";
 
 export default function Home2(){
+
     return (
         <>
             <NavBar/>
@@ -30,10 +33,10 @@ export default function Home2(){
                 </div>
                 <h2 className="text-4xl text-center mt-8 mb-14">Products</h2>
                 <div className="flex gap-8 flex-wrap justify-center mb-16">
-                    <CardProduct imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
-                    <CardProduct imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
-                    <CardProduct imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
-                    <CardProduct imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
+                    <CardProduct id={1} imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
+                    <CardProduct id={2} imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
+                    <CardProduct id={3} imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
+                    <CardProduct id={4} imageUrl="../../public/ring.png" name="asd" subname="asdd"/>
                 </div>
             </section>
             <footer className="text-left p-3 bg-purple-400 text-white">ASDASD</footer>

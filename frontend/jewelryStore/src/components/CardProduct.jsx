@@ -1,6 +1,24 @@
-export default function CardProduct({id=null,name, subname, description, imageUrl}) {
-    const addToCart = (id)=>{
+import {useContext} from "react";
+import {cartContext} from "../helper/Context.js";
 
+export default function CardProduct({id=null,name, subname, description, imageUrl}) {
+    const {cart ,cartDispatch} = useContext(cartContext);
+    console.log(cart);
+    const addToCart = (id) => {
+        cartDispatch({
+            type:"add",
+            payload:{
+                id:id
+            }
+        })
+    }
+    const subtractToCart = (id) => {
+        cartDispatch({
+            type:"remove",
+            payload:{
+                id:id,
+            }
+        })
     }
 
     return (
@@ -16,7 +34,8 @@ export default function CardProduct({id=null,name, subname, description, imageUr
                 <p className="text-wrap break-all block">
                     {description}
                 </p>
-                <button onClick={()=>addToCart(id)} className="bg-yellow-400 px-4 py-2 text-white rounded-md mt-8">Mua</button>
+                <button onClick={()=>addToCart(id)} className="bg-yellow-400 px-4 py-2 text-white rounded-md mt-8">+</button>
+                <button onClick={()=>subtractToCart(id)} className="bg-yellow-400 px-4 py-2 text-white rounded-md mt-8 ml-3">-</button>
             </div>
         </>
     )

@@ -38,6 +38,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/cart" element={<Cart/>}/>
             <Route path="/client" element={<Home2/>}/>
             <Route path="/users" element={<Users/>}/>
             <Route path="/users/add" element={<AddUser/>}/>
