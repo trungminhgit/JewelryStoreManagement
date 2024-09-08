@@ -158,10 +158,9 @@ export default function EditProduct() {
                             />
                         </div>
                         <div className="mb-4">
-                            <img src={productImageUrl} className="w-full p-4 rounded-md"/>
+                            <img src={productImageUrl} className="size-48 p-4 rounded-md"/>
                         </div>
                         <div className="mb-4">
-                            <label className="mb-2 inline-block" htmlFor="productImage">Product Image</label>
                             <input type="file" id="productImage"
                                    className="w-full rounded-md"
                                    onChange={(e) => {

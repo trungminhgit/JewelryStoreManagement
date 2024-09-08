@@ -68,7 +68,7 @@ export default function Products() {
             <main className="h-screen p-4 sm:ml-64 bg-gray-100">
                 <section className="p-4">
                     <section className="mb-12">
-                        <h1 className="text-4xl">Tiêu đề</h1>
+                        <h1 className="text-4xl">Products</h1>
                     </section>
                     <div className="flex flex-col gap-4 ml-2 mb-4">
                         <div>

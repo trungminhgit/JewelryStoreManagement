@@ -34,4 +34,8 @@ export const endpoints = {
     "comment-add":(productId)=>"/product/add-comment/"+productId,
     "user-search":(keyword) => `/user/search?firstName=${keyword}`,
     "product-search":(keyword) => `/product/search-product?productName=${keyword}`,
+    "revenue-by-year": (year)=>`/revenue/year?year=${year}`,
+    "revenue-by-quarter": (quarter, year)=>`/revenue/quarter?quarter=${quarter}&year=${year}`,
+    "revenue-by-month": (month, year)=>`/revenue/month?month=${month}&year=${year}`,
+    "revenue-by-week": (week, year)=>`/revenue/week?week=${week}&year=${year}`,
 }
