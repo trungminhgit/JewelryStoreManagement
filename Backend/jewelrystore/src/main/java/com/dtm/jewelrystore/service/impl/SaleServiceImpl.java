@@ -7,17 +7,37 @@ package com.dtm.jewelrystore.service.impl;
 import com.dtm.jewelrystore.dto.request.CartRequestDTO;
 import com.dtm.jewelrystore.model.Receipt;
 import com.dtm.jewelrystore.model.ReceiptDetail;
+import com.dtm.jewelrystore.model.User;
 import com.dtm.jewelrystore.repository.ProductRepository;
 import com.dtm.jewelrystore.repository.ReceiptDetailRepository;
 import com.dtm.jewelrystore.repository.ReceiptRepository;
+import com.dtm.jewelrystore.service.EmailService;
+import com.dtm.jewelrystore.service.JwtService;
 import com.dtm.jewelrystore.service.SaleService;
 import com.dtm.jewelrystore.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Div;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+
+import jakarta.servlet.http.Cookie;
+import java.io.ByteArrayOutputStream;
+import java.net.URLDecoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,12 +53,13 @@ public class SaleServiceImpl implements SaleService {
     private final ReceiptRepository receiptRepo;
     private final ReceiptDetailRepository receiptDetailRepo;
     private final ProductRepository productRepo;
+    private final JwtService jwtService;
+    private final EmailService emailService;
 
     @Override
-    public boolean addReceipt(Map<String, CartRequestDTO> cartItems) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        StringBuilder receiptDetails = new StringBuilder();
-//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public boolean addReceipt(Map<String, CartRequestDTO> cartItems, String token) {
+        Authentication authentication = authenticateUserWithToken(token);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Receipt receipt = Receipt.builder()
                 .createDate(new Date(System.currentTimeMillis()))
                 .user(userService.getByUsername(authentication.getName()))
@@ -46,8 +67,34 @@ public class SaleServiceImpl implements SaleService {
 
         this.receiptRepo.save(receipt);
 
-//        receiptDetails.append("RECEIPT DETAILS: \n\n");
-//        receiptDetails.append(String.format("%-15s\t%-26s\t\t%-26s\t\t%-12s\n", "Room", "Start time", "Finish time", "Price"));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+
+        Paragraph title = new Paragraph("RECEIPT CONFIRMATION")
+                .setFontSize(20)
+                .setBold()
+                .setTextAlignment(TextAlignment.CENTER);
+        document.add(title);
+
+        Paragraph storeInfo = new Paragraph("JEWELRY STORE\n325 Dinh Bo Linh - District 10 - HCM")
+                .setTextAlignment(TextAlignment.CENTER);
+        document.add(storeInfo);
+
+        Paragraph dateParagraph = new Paragraph("Date: " + LocalDateTime.now().format(dateTimeFormatter))
+                .setTextAlignment(TextAlignment.CENTER);
+        document.add(dateParagraph);
+
+        Table table = new Table(new float[]{3, 2, 2})
+                .setWidth(pdf.getDefaultPageSize().getWidth() * 0.9f)
+                .setTextAlignment(TextAlignment.CENTER);
+        table.addHeaderCell("Product name");
+        table.addHeaderCell("Quantity");
+        table.addHeaderCell("Price");
+
+        double totalPrice = 0.0;
+        int totalQuantity = 0;
         for (CartRequestDTO c : cartItems.values()) {
             ReceiptDetail receiptDetail = new ReceiptDetail();
             receiptDetail.setQuantity(c.getQuantity());
@@ -55,26 +102,65 @@ public class SaleServiceImpl implements SaleService {
             receiptDetail.setReceipt(receipt);
             receiptDetail.setProduct(productRepo.findByProductID(c.getProductID()));
             this.receiptDetailRepo.save(receiptDetail);
-            //Thêm chi tiết đơn hàng vào nội dung mail
-//            double price = (double) receiptDetail.getPrice();
-//            String startTime = receiptDetail.getStartTime().format(dateTimeFormatter);  
-//            String finishTime = receiptDetail.getFinishTime().format(dateTimeFormatter); 
-//            receiptDetails.append(String.format(
-//                "%-15s\t%-25s\t%-25s\t%12.2f\n",
-//                receiptDetail.getRoomID().getRoomName(),
-//                startTime,
-//                finishTime,
-//                price
-//            ));
+
+            double price = receiptDetail.getPrice().doubleValue();
+            totalPrice += price;
+            totalQuantity += receiptDetail.getQuantity();
+            table.addCell(receiptDetail.getProduct().getProductName());
+            table.addCell(String.valueOf(receiptDetail.getQuantity()));
+            table.addCell(String.format("%.2f", price));
         }
-        //Gửi email sau khi lưu đơn hàng
-//        User user = (User) this.userDetailServiceImpl.findByUserName(authentication.getName());
-//        emailService.sendEmailToUser(
-//                "Receipt Confirmation",
-//                receiptDetails.toString(),
-//                user.getUserID()
-//        );
+        table.addCell("Total");
+        table.addCell(String.valueOf(totalQuantity));
+        table.addCell(String.format("%.2f", totalPrice));
+
+        document.add(table);
+        document.close();
+
+        try {
+            User user = userService.getByUsername(authentication.getName());
+            emailService.sendEmailWithAttachment(
+                    "Receipt Confirmation",
+                    "Please find attached the receipt for your purchase.",
+                    (long) user.getUserID(),
+                    byteArrayOutputStream.toByteArray(),
+                    "receipt_detail.pdf"
+            );
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle email sending error
+            return false;
+        }
         return true;
     }
 
+    @Override
+    public Map<String, CartRequestDTO> getCartItemsFromRequest(Cookie[] cookies
+    ) {
+        Map<String, CartRequestDTO> cartItems = new HashMap<>();
+        if (cookies != null) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            for (Cookie cookie : cookies) {
+                if ("cartItems".equals(cookie.getName())) {
+                    String cookieValue = cookie.getValue();
+                    try {
+                        String decodedValue = URLDecoder.decode(cookieValue, "UTF-8");
+                        cartItems = objectMapper.readValue(decodedValue, objectMapper.getTypeFactory().constructMapType(Map.class, String.class, CartRequestDTO.class));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+            }
+        }
+        return cartItems;
+    }
+
+    private Authentication authenticateUserWithToken(String token) {
+
+        UserDetails userDetails = userService.getByUsername(jwtService.extractUserName(token));
+        if (userDetails != null) {
+            return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        }
+        return null;
+    }
 }

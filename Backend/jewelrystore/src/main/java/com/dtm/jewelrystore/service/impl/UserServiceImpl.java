@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByUserID(long userID) {
+        return userRepository.findByUserID(userID).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
     public long saveUser(UserRequestDTO request) {
         Optional<User> oUser = userRepository.findByUsername(request.getUsername());
         if (oUser.isPresent()) {
