@@ -22,6 +22,8 @@ public interface UserService {
 
     User getByUsername(String userName);
     
+    User getByUserID(long userID);
+    
     long saveUser(UserRequestDTO request);
 
     void updateAvatar(long userID, MultipartFile avatar);

@@ -56,7 +56,8 @@ public class AppConfig {
                         "/api/product/list-product",
                         "/api/product/{productID}",
                         "/api/product/comments/{productID}",
-                        "/api/product/search-product").permitAll()
+                        "/api/product/search-product",
+                        "/api/payment/vn-pay-callback").permitAll()
                 .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(preFilter, UsernamePasswordAuthenticationFilter.class);
