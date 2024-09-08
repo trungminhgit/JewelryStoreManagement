@@ -5,6 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import {cartContext} from "../helper/Context.js";
 import Cookies from "js-cookie";
 import {authApi, endpoints} from "../helper/APIs.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Home2(){
     const [prouducts, setProducts] = useState([])
@@ -14,6 +15,7 @@ export default function Home2(){
         console.log(response.data.data.items)
         setProducts(response.data.data.items);
     }
+    const navigate = useNavigate()
     useEffect(() => {
         fetchProducts()
     },[])
@@ -38,7 +40,10 @@ export default function Home2(){
                 <div className="flex gap-6 w-2/3 mx-auto mb-20 scrollbar pb-8 overflow-x-auto">
                     {prouducts.map(((p,index)=>{
                         if(index <= 2){
-                            return <CardSpecialProduct key={p.productID} name={p.productName} subname={p.categoryName} imgUrl={p.productImage}/>
+
+                            return <div className="cursor-pointer" onClick={()=>navigate("/products-client/"+p.productID)}>
+                                <CardSpecialProduct key={p.productID} name={p.productName} subname={p.categoryName} imgUrl={p.productImage}/>
+                            </div>
                         }
                     }))}
 
@@ -46,7 +51,9 @@ export default function Home2(){
                 <h2 className="text-4xl text-center mt-8 mb-14">Products</h2>
                 <div className="flex gap-x-2 gap-y-4 flex-wrap justify-center">
                     {prouducts.map(p=>{
-                        return <CardProduct key={p.productID} id={p.productID} name={p.productName} subname={p.categoryName} imageUrl={p.productImage}/>
+                        return <div className="cursor-pointer" onClick={()=>navigate("/products-client/"+p.productID)}>
+                            <CardProduct key={p.productID} id={p.productID} name={p.productName} subname={p.categoryName} imageUrl={p.productImage}/>
+                        </div>
                     })}
 
                 </div>

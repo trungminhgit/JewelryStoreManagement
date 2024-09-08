@@ -25,12 +25,21 @@ export default function CardProduct({id=null,name, subname, description, imageUr
 
     }
     const subtractToCart = (id) => {
-        cartDispatch({
-            type:"remove",
-            payload:{
-                id:id,
-            }
-        })
+        toast.success("Subtract successfully",{ onClose:()=>{
+                cartDispatch({
+                    type:"remove",
+                    payload:{
+                        id:id,
+                    }
+                })
+            }, onClick:()=>{
+                cartDispatch({
+                    type:"remove",
+                    payload:{
+                        id:id,
+                    }
+                })
+            }})
     }
 
     return (
