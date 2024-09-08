@@ -45,10 +45,10 @@ export const cartInitState = {
 export const cartReducer = (state = cartInitState, action) => {
     switch (action.type) {
         case 'add':
+        {
             const exitsItem = state.cart.find(item => item.id === action.payload.id)
             if (exitsItem) {
                 return {
-                    ...state,
                     cart: state.cart.map(item => item.id === action.payload.id ? {
                         ...item,
                         quantity: item.quantity + 1
@@ -56,10 +56,10 @@ export const cartReducer = (state = cartInitState, action) => {
                 }
             } else {
                 return {
-                    ...state,
                     cart: [...state.cart, {...action.payload, quantity: 1}]
                 }
             }
+        }
         case "remove":
             return {
                 ...state,
@@ -68,6 +68,7 @@ export const cartReducer = (state = cartInitState, action) => {
                 }).filter(item => item.quantity>0)
             }
 
-
+        default:
+            return state
     }
 }
