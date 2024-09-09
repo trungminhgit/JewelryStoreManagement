@@ -64,7 +64,7 @@ export default function Products2() {
                     }
                     {!loading &&
                         products.map(products=>{
-                            return <CardProduct key={products.productID} name={products.productName} subname={products.categoryName}
+                            return <CardProduct key={products.productID} id={products.productID} name={products.productName} subname={products.categoryName}
                                 description={products.description} imageUrl={products.productImage}
                             />
                         })

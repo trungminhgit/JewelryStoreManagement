@@ -51,9 +51,7 @@ export default function Home2(){
                 <h2 className="text-4xl text-center mt-8 mb-14">Products</h2>
                 <div className="flex gap-x-2 gap-y-4 flex-wrap justify-center">
                     {prouducts.map(p=>{
-                        return <div className="cursor-pointer" onClick={()=>navigate("/products-client/"+p.productID)}>
-                            <CardProduct key={p.productID} id={p.productID} name={p.productName} subname={p.categoryName} imageUrl={p.productImage}/>
-                        </div>
+                        return <CardProduct key={p.productID} id={p.productID} name={p.productName} subname={p.categoryName} imageUrl={p.productImage}/>
                     })}
 
                 </div>
