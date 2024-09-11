@@ -25,6 +25,7 @@ import {userContext, productContext, cartContext} from "./helper/Context.js";
 import EditUser from "./pages/EditUser.jsx";
 import EditProduct from "./pages/EditProduct.jsx";
 import AddProduct from "./pages/AddProduct.jsx";
+import Statistic from "./pages/Statistic.jsx";
 
 function App() {
   const [user, userDispatch] = useReducer(userReducer, initialState);
@@ -45,8 +46,10 @@ function App() {
             <Route path="/users/:id" element={<EditUser/>}/>
             <Route path="/products" element={<Products/>}/>
             <Route path="/products-client" element={<Products2/>}/>
+            <Route path="/products-client/:id" element={<DetailProduct2/>}/>
             <Route path="/products/add" element={<AddProduct/>}/>
             <Route path="products/:id" element={<EditProduct/>}/>
+            <Route path="/statistics" element={<Statistic/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
           </Routes>

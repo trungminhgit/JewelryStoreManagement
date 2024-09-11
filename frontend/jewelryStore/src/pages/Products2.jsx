@@ -37,13 +37,13 @@ export default function Products2() {
         <>
             <NavBar/>
             <main className="w-[80%] mx-auto">
-                <h1 className="mb-8 text-4xl mt-8">Danh sach san pham</h1>
+                <h1 className="mb-8 text-4xl mt-8">Danh sách sản phẩm</h1>
                 <div className="flex gap-2">
                     <input type="text" value={keyword} onChange={(e)=>setKeyword(e.target.value)} placeholder="Enter keyword" className="text-md px-4 py-2 bg-white border border-black rounded-md"/>
                     <button onClick={search} className="px-4 py-2 rounded-md bg-purple-400 text-white">Search</button>
                 </div>
 
-                <div className="flex gap-8 flex-wrap mt-8">
+                <div className="flex gap-x-2 gap-y-4 flex-wrap mt-8">
                     {loading &&
                         <div
                             className="flex items-center justify-center w-full h-56 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -64,7 +64,7 @@ export default function Products2() {
                     }
                     {!loading &&
                         products.map(products=>{
-                            return <CardProduct key={products.productID} name={products.productName} subname={products.categoryName}
+                            return <CardProduct key={products.productID} id={products.productID} name={products.productName} subname={products.categoryName}
                                 description={products.description} imageUrl={products.productImage}
                             />
                         })

@@ -20,7 +20,13 @@ export default function Login() {
         if(response.data.token){
             console.log(response.data)
             Cookies.set("token", response.data.token);
-            navigate("/");
+            userDispatch({
+                type:"login",
+                payload:{
+                    user:username
+                }
+            })
+            navigate(-1);
         }else{
             toast.error("Invalid password")
         }

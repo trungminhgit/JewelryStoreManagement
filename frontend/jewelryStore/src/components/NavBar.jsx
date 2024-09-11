@@ -1,17 +1,30 @@
 import {useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import {cartContext} from "../helper/Context.js";
+import {cartContext, userContext} from "../helper/Context.js";
+import {authApi, endpoints} from "../helper/APIs.js";
+import Cookies from "js-cookie";
 
 export default function NavBar() {
     const navigate = useNavigate();
     const {cart} = useContext(cartContext);
+    const {user} = useContext(userContext);
     const [total, setTotal] = useState(0);
+    const [userName, setUserName] = useState(null);
+
+    const fetchCurrentUser = async () => {
+        const token = Cookies.get("token")
+        const response = await authApi(token).get(endpoints["current-user"])
+        setUserName(response.data.data.username)
+    }
+
     useEffect(() => {
         let total = 0
+        console.log('cart', cart)
         cart.cart.forEach((item) => {
             total += Number(item.quantity);
         })
         setTotal(total)
+        fetchCurrentUser()
     }, [cart])
 
     return (
@@ -37,11 +50,20 @@ export default function NavBar() {
                             </svg>
                             <span className="text-2xl absolute -bottom-[10px] -right-[5px]">{total}</span>
                         </div>
-                        <svg className="size-12 text-gray-800 dark:text-white" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-width="2"
-                                  d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                        </svg>
+                        {!user &&
+                            <div onClick={() => navigate("/login")}>
+                                <svg className="size-12 text-gray-800 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-width="2"
+                                          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                            </div>
+                        }
+                        {userName&&
+                            <div className="size-12 flex items-center text-lg ml-4">{userName}</div>
+                        }
+
 
                     </div>
                 </nav>
