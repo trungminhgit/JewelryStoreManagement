@@ -40,37 +40,12 @@ public class PaymentController {
     }
 
     @GetMapping("vn-pay-callback")
-    public ResponseData<PaymentResponse> payCallback(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        Map<String, CartRequestDTO> cartItems = (cookies != null && cookies.length > 0)
-                ? saleService.getCartItemsFromRequest(cookies)
-                : new HashMap<>();
-
-        String token = null;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        log.info(token);
+    public ResponseData<?> payCallback(HttpServletRequest request) {
         String status = request.getParameter("vnp_ResponseCode");
         if (status.equals("00")) {
-            try {
-                log.info("Request add receipt");
-                if (saleService.addReceipt(cartItems, token)) {
-                    return new ResponseData<>(HttpStatus.ACCEPTED.value(), "Add receipt successfully");
-                } else {
-                    return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Add receipt failed");
-                }
-            } catch (Exception e) {
-                log.error("Add receipt failed, error message = {}", e);
-                return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Add receipt failed");
-            }
+            return new ResponseData<>(HttpStatus.OK.value(),"Payment successfully ");
         } else {
-            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Pay callback failed");
+            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Payment failed");
         }
     }
 }

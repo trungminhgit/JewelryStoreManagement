@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public interface SaleService {
 
-    boolean addReceipt(Map<String, CartRequestDTO> cartItems, String token);
+    boolean addReceipt(Map<String, CartRequestDTO> cartItems);
 
-    public Map<String, CartRequestDTO> getCartItemsFromRequest(Cookie[] cookies);
 }
