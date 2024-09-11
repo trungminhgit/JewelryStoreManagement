@@ -57,8 +57,8 @@ public class SaleServiceImpl implements SaleService {
     private final EmailService emailService;
 
     @Override
-    public boolean addReceipt(Map<String, CartRequestDTO> cartItems, String token) {
-        Authentication authentication = authenticateUserWithToken(token);
+    public boolean addReceipt(Map<String, CartRequestDTO> cartItems) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Receipt receipt = Receipt.builder()
                 .createDate(new Date(System.currentTimeMillis()))
@@ -131,36 +131,5 @@ public class SaleServiceImpl implements SaleService {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public Map<String, CartRequestDTO> getCartItemsFromRequest(Cookie[] cookies
-    ) {
-        Map<String, CartRequestDTO> cartItems = new HashMap<>();
-        if (cookies != null) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            for (Cookie cookie : cookies) {
-                if ("cartItems".equals(cookie.getName())) {
-                    String cookieValue = cookie.getValue();
-                    try {
-                        String decodedValue = URLDecoder.decode(cookieValue, "UTF-8");
-                        cartItems = objectMapper.readValue(decodedValue, objectMapper.getTypeFactory().constructMapType(Map.class, String.class, CartRequestDTO.class));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            }
-        }
-        return cartItems;
-    }
-
-    private Authentication authenticateUserWithToken(String token) {
-
-        UserDetails userDetails = userService.getByUsername(jwtService.extractUserName(token));
-        if (userDetails != null) {
-            return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        }
-        return null;
     }
 }
