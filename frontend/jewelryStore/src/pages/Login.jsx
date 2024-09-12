@@ -19,6 +19,7 @@ export default function Login() {
         const response = await standardApi().post(endpoints["login"], data);
         if(response.data.token){
             console.log(response.data)
+            Cookies.remove("token")
             Cookies.set("token", response.data.token);
             userDispatch({
                 type:"login",
@@ -26,7 +27,7 @@ export default function Login() {
                     user:username
                 }
             })
-            navigate(-1);
+            navigate("/");
         }else{
             toast.error("Invalid password")
         }

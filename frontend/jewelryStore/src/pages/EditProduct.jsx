@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import {authApi, endpoints, standardApi} from "../helper/APIs.js";
 import {productContext, userContext} from "../helper/Context.js";
+import {toast} from "react-toastify";
 
 export default function EditProduct() {
     const {id} = useParams();
@@ -58,7 +59,13 @@ export default function EditProduct() {
             headers:{
                 "Content-Type":'multipart/form-data'
             }
-        })
+        }).catch(err=>{
+            console.log(err)
+        });
+        if(response.data.status!==202){
+            setLoading(false)
+            toast.error(response.data.message)
+        }
         if(response.data.status===202){
             setLoading(false)
             console.log("response",response.data)
@@ -190,7 +197,7 @@ export default function EditProduct() {
                                 Update
 
                             </button>}
-                            <input type="button" value="Cancel"
+                            <input type="button" value="Cancel" onClick={()=>navigate(-1)}
                                    className="text-black p-3 rounded-md border border-black"/>
                         </div>
                     </section>

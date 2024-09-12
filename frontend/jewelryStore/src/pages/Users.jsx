@@ -54,6 +54,20 @@ export default function Users() {
         console.log("message",user.message)
         user.message&&toast.success(user.message)
     }, [])
+
+    const [roleId, setRoleId] = React.useState()
+    const fetchCurrentUser = async () => {
+        const token = Cookies.get("token");
+        console.log(token)
+        const response = await authApi(token).get(endpoints["current-user"])
+        setRoleId(response.data.data.role.roleID)
+        console.log("role",response.data.data.role)
+    }
+    useEffect(() => {
+
+        fetchCurrentUser()
+    }, []);
+
     return (
         <>
             <ToastContainer position="top-right"/>
@@ -93,7 +107,8 @@ export default function Users() {
                                 </th>
                                 <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Email</th>
                                 <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Phone</th>
-                                <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>
+                                {roleId === 1 &&
+                                    <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>}
                             </tr>
                             </thead>
                             <tbody>
@@ -120,17 +135,21 @@ export default function Users() {
                                             {user.phone}
                                         </td>
 
-                                        <td onClick={() => setOpen(!open)}
-                                            className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
-                                            <p onClick={
-                                                () => navigate("/users/" + user.userID)
-                                            }
-                                               className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
-                                            <p onClick={() => {
-                                                del(user.userID)
-                                            }}
-                                               className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
-                                        </td>
+                                        {roleId === 1 &&
+                                            <td onClick={() => setOpen(!open)}
+                                                className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
+                                                <p onClick={
+                                                    () => navigate("/users/" + user.userID)
+                                                }
+                                                   className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
+                                                <p onClick={() => {
+                                                    del(user.userID)
+                                                }}
+                                                   className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
+                                            </td>
+
+                                        }
+
                                     </tr>
                                 )
                             })}
@@ -140,12 +159,13 @@ export default function Users() {
                     </div>
                     <div className="flex justify-center gap-2 py-8">
                         {array.map((item, index) => {
-                            if(index===paginates.pageNo)
-                                return <div key={index} onClick={()=>{
+                            if (index === paginates.pageNo)
+                                return <div key={index} onClick={() => {
                                     fetchUsers(index)
-                                }} className="text-white bg-orange-500 p-3 px-4 rounded-lg cursor-pointer">{index+1}</div>
+                                }}
+                                            className="text-white bg-orange-500 p-3 px-4 rounded-lg cursor-pointer">{index + 1}</div>
                             else
-                                return <div key={index} onClick={()=>{
+                                return <div key={index} onClick={() => {
                                     fetchUsers(index)
                                 }} className="text-white bg-black p-3 px-4 rounded-lg cursor-pointer">{index+1}</div>
                         })}

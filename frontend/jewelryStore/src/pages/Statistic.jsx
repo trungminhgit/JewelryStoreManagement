@@ -289,8 +289,9 @@ export default function Statistic() {
                     </div>
                     <div className="size-1/2 mx-auto">
                         <VictoryChart
-                            width={450}
-                            height={250}
+                            padding={100}
+                            width={500}
+                            height={350}
                         >
                             <VictoryArea
                                 data={dataLineChar.data}
@@ -315,6 +316,7 @@ export default function Statistic() {
                         <VictoryPie
                             colorScale={['rgb(253 246 178)', '#333']}
                             width={500}
+                            height={350}
                             data={dataPieChar.data}
                             style={dataPieChar.style}
                         />

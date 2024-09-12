@@ -6,10 +6,11 @@ import {userContext} from "../helper/Context.js";
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = React.useState(false);
-    const {dispatch} = useContext(userContext)
+    const {userDispatch} = useContext(userContext)
     const navigate = useNavigate();
     const [userName, setUserName] = React.useState("");
     const [userId, setUserId] = React.useState("");
+    const [roleId, setRoleId] = React.useState()
     useEffect(() => {
         const fetchCurrentUser = async () => {
             const token = Cookies.get("token");
@@ -17,14 +18,21 @@ export default function Sidebar() {
             const response = await authApi(token).get(endpoints["current-user"])
             setUserName(response.data.data.username)
             setUserId(response.data.data.userID)
+            setRoleId(response.data.data.role.roleID)
         }
         fetchCurrentUser()
     }, []);
 
     const logout = () =>{
-        dispatch({
+        Cookies.remove("token")
+
+        setUserName("none")
+        setUserId("none")
+        userDispatch({
             type:"logout"
         })
+        navigate("/login")
+
 
     }
 
@@ -91,20 +99,7 @@ export default function Sidebar() {
                                 <span className=" ms-3 whitespace-nowrap">Users</span>
                             </div>
                         </li>
-                        <li>
-                            <div
-                               className="flex items-center p-2 bg-yellow-100 text-black rounded-r-[50px] hover:bg-yellow-200 group">
-                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeWidth="2"
-                                          d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                                </svg>
 
-
-                                <span className=" ms-3 whitespace-nowrap">Payment</span>
-                            </div>
-                        </li>
                         <li>
                             <div onClick={()=>navigate("/products/")}
                                className="flex items-center p-2 text-black bg-yellow-100 rounded-r-[50px] hover:bg-yellow-200 group">
@@ -118,21 +113,25 @@ export default function Sidebar() {
                                 <span className=" ms-3 whitespace-nowrap">Products</span>
                             </div>
                         </li>
-                        <li>
-                            <div onClick={()=>navigate("/statistics/")}
-                               className="bg-yellow-100 flex items-center p-2 text-black rounded-r-[50px] hover:bg-yellow-200 group">
-                                <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="2"
-                                          d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
-                                </svg>
+                        {roleId===1&&
+                            (
+                                <li>
+                                    <div onClick={() => navigate("/statistics/")}
+                                         className="bg-yellow-100 flex items-center p-2 text-black rounded-r-[50px] hover:bg-yellow-200 group">
+                                        <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                             viewBox="0 0 24 24">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                                  strokeWidth="2"
+                                                  d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
+                                        </svg>
 
 
-                                <span className=" ms-3 whitespace-nowrap">Statistics</span>
-                            </div>
-                        </li>
+                                        <span className=" ms-3 whitespace-nowrap">Statistics</span>
+                                    </div>
+                                </li>
+                            )
+                        }
                         <li onClick={() => setIsOpen(!isOpen)}
                             className="flex justify-between items-center bg-yellow-100 rounded-r-[50px] relative cursor-pointer hover:bg-yellow-200 p-2 rounded-lg">
                             <section className="flex gap-3 items-center">
@@ -141,7 +140,7 @@ export default function Sidebar() {
                                      alt="Rounded avatar"/>
                                 <section className="text-left">
                                     <h4 className="text-md">{userName}</h4>
-                                    {!userName&&<h4 className="text-md">None</h4>}
+                                    {!userName && <h4 className="text-md">None</h4>}
                                 </section>
                             </section>
                             <div>
