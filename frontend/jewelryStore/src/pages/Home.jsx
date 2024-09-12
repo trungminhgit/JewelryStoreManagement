@@ -81,6 +81,8 @@ export default function Home() {
         }
     }
     useEffect(() => {
+        const token = Cookies.get("token")
+        console.log(token)
         const currentDate = new Date();
         let year = currentDate.getFullYear();
         let month = currentDate.getMonth()+1;
@@ -111,7 +113,18 @@ export default function Home() {
         user.message&&toast.success(user.message)
     }, [])
 
+    const [roleId, setRoleId] = React.useState()
+    const fetchCurrentUser = async () => {
+        const token = Cookies.get("token");
+        console.log(token)
+        const response = await authApi(token).get(endpoints["current-user"])
+        setRoleId(response.data.data.role.roleID)
+        console.log("role",response.data.data.role)
+    }
+    useEffect(() => {
 
+        fetchCurrentUser()
+    }, []);
     return (
         <>
             <ToastContainer position="top-right"/>
@@ -119,13 +132,20 @@ export default function Home() {
             <Sidebar />
             <main className="h-screen p-4 sm:ml-64 bg-gray-100">
                 <section className="p-4">
-                    <section className="mb-8">
-                        <h1 className="text-4xl">Statistics</h1>
-                    </section>
-                    <div className="flex flex-wrap gap-4 w-full mb-8">
-                        <StatisticItem title="revenue year" data={revenueYear}/><StatisticItem title="revenue quarter" data={revenueQuarter}/>
-                        <StatisticItem title="revenue month" data={revenueMonth}/><StatisticItem title="revenue week" data={revenueWeek}/>
-                    </div>
+                    {roleId===1&&(
+                        <>
+                            <section className="mb-8">
+                                <h1 className="text-4xl">Statistics</h1>
+                            </section>
+                            <div className="flex flex-wrap gap-4 w-full mb-8">
+                                <StatisticItem title="revenue year" data={revenueYear}/><StatisticItem
+                                title="revenue quarter" data={revenueQuarter}/>
+                                <StatisticItem title="revenue month" data={revenueMonth}/><StatisticItem
+                                title="revenue week" data={revenueWeek}/>
+                            </div>
+                        </>
+                    )}
+
                     <section className="mb-8">
                         <h1 className="text-4xl">Users</h1>
                     </section>
@@ -159,7 +179,8 @@ export default function Home() {
                                 </th>
                                 <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Email</th>
                                 <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Phone</th>
-                                <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>
+                                {roleId === 1 &&
+                                    <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>}
                             </tr>
                             </thead>
                             <tbody>
@@ -188,19 +209,23 @@ export default function Home() {
                                             {user.phone}
                                         </td>
 
-                                        <td onClick={() => setOpen(!open)}
-                                            className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
-                                            <p onClick={
-                                                () => navigate("/users/" + user.userID)
-                                            }
-                                               className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
-                                            <p onClick={() => {
-                                                del(user.userID)
-                                            }}
-                                               className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
-                                        </td>
-                                    </tr>
-                                )
+
+                                        {roleId===1&&(
+                                            <td onClick={() => setOpen(!open)}
+                                                className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
+                                                <p onClick={
+                                                    () => navigate("/users/" + user.userID)
+                                                }
+                                                   className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
+                                                <p onClick={() => {
+                                                    del(user.userID)
+                                                }}
+                                                   className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
+                                            </td>
+                                        )}
+
+                            </tr>
+                            )
                             })}
 
                             </tbody>

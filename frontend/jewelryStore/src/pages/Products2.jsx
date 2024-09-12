@@ -4,6 +4,7 @@ import Footer from "../components/Footer.jsx";
 import React, {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {authApi, endpoints} from "../helper/APIs.js";
+import {ToastContainer} from "react-toastify";
 
 export default function Products2() {
     const [loading, setLoading] = React.useState(false)
@@ -18,9 +19,6 @@ export default function Products2() {
         setProducts(response.data.data.items)
         setPaginates(response.data.data)
         setLoading(false)
-        console.log("user ",response.data.data)
-        const arr = response.data.data
-        console.log(arr.items.map(item => item.phone))
     }
     const length = paginates.totalPage; // Length of the array
     const array = Array.from({ length }, (_, index) => index);
@@ -30,8 +28,10 @@ export default function Products2() {
     const search = async ()=>{
         const token = Cookies.get("token");
         const response = await authApi(token).get(endpoints["product-search"](keyword));
-        console.log(response.data.data);
+        console.log("result search",response.data.data);
         setProducts(response.data.data.items);
+        setPaginates(response.data.data)
+        setLoading(false)
     }
     return (
         <>
@@ -42,6 +42,7 @@ export default function Products2() {
                     <input type="text" value={keyword} onChange={(e)=>setKeyword(e.target.value)} placeholder="Enter keyword" className="text-md px-4 py-2 bg-white border border-black rounded-md"/>
                     <button onClick={search} className="px-4 py-2 rounded-md bg-purple-400 text-white">Search</button>
                 </div>
+                <ToastContainer position='top-right'/>
 
                 <div className="flex gap-x-2 gap-y-4 flex-wrap mt-8">
                     {loading &&
@@ -63,9 +64,10 @@ export default function Products2() {
                         </div>
                     }
                     {!loading &&
-                        products.map(products=>{
-                            return <CardProduct key={products.productID} id={products.productID} name={products.productName} subname={products.categoryName}
-                                description={products.description} imageUrl={products.productImage}
+                        products.map(product=>{
+
+                            return <CardProduct key={product.productID} id={product.productID} name={product.productName} subname={product.categoryName}
+                                description={product.description} imageUrl={product.productImage}
                             />
                         })
                     }

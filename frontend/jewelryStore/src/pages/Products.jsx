@@ -60,7 +60,18 @@ export default function Products() {
         console.log("message",product.message)
         product.message&&toast.success(product.message)
     }, [])
+    const [roleId, setRoleId] = React.useState()
+    const fetchCurrentUser = async () => {
+        const token = Cookies.get("token");
+        console.log(token)
+        const response = await authApi(token).get(endpoints["current-user"])
+        setRoleId(response.data.data.role.roleID)
+        console.log("role",response.data.data.role)
+    }
+    useEffect(() => {
 
+        fetchCurrentUser()
+    }, []);
     return (
         <>
             <ToastContainer position="top-right"/>
@@ -80,10 +91,13 @@ export default function Products() {
                             </button>
                         </div>
                         <div>
-                            <button onClick={
-                                () => navigate("/products/add")
-                            } className="bg-purple-500 p-3 text-white rounded-md text-lg">Add
-                            </button>
+                            {roleId === 1 &&
+                                <button onClick={
+                                    () => navigate("/products/add")
+                                } className="bg-purple-500 p-3 text-white rounded-md text-lg">Add
+                                </button>
+                            }
+
                         </div>
                     </div>
                     <div className="overflow-x-auto">
@@ -102,7 +116,9 @@ export default function Products() {
                                     <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Description</th>
                                     <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Category</th>
                                     <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white">Material</th>
-                                    <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>
+                                    {roleId === 1 &&
+                                        <th className="p-2 px-10 border-8 text-xl text-left border-white bg-black text-white"></th>}
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -131,17 +147,21 @@ export default function Products() {
                                             <td className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white">
                                                 {product.materialName}
                                             </td>
-                                            <td onClick={() => setOpen(!open)}
-                                                className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
-                                                <p onClick={
-                                                    () => navigate("/products/" + product.productID)
-                                                }
-                                                   className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
-                                                <p onClick={() => {
-                                                    del(product.productID)
-                                                }}
-                                                   className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
-                                            </td>
+                                            {roleId === 1 &&
+                                                <td onClick={() => setOpen(!open)}
+                                                    className="p-2 px-10 border-8 text-xl text-left border-white bg-purple-500 text-white relative">
+                                                    <p onClick={
+                                                        () => navigate("/products/" + product.productID)
+                                                    }
+                                                       className="py-2 px-4 text-black bg-yellow-300 mb-2 hover:bg-gray-100 hover:text-black">Edit</p>
+                                                    <p onClick={() => {
+                                                        del(product.productID)
+                                                    }}
+                                                       className="py-2 px-4 text-black bg-yellow-300 hover:bg-gray-100 hover:text-black">Delete</p>
+                                                </td>
+
+                                            }
+
                                         </tr>
                                     )
                                 })}
@@ -149,7 +169,7 @@ export default function Products() {
                                 </tbody>
                             </table>
                         }
-                        {loading&&
+                        {loading &&
                             <div
                                 className="flex items-center justify-center w-full h-56 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                                 <div role="status">

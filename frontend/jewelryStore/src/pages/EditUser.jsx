@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import {authApi, endpoints, standardApi} from "../helper/APIs.js";
 import {userContext} from "../helper/Context.js";
+import {toast} from "react-toastify";
 
 export default function EditUser() {
     const {id} = useParams();
@@ -49,6 +50,10 @@ export default function EditUser() {
 
         }
         const response = await authApi(token).put(endpoints["user"](id), data)
+        if(response.data.status!==202){
+            setLoading(false)
+            toast.error(response.data.message)
+        }
         if(response.data.status===202){
             console.log(response.data)
             userDispatch({
@@ -58,7 +63,6 @@ export default function EditUser() {
                 }
             })
             navigate(-1)
-
         }
     }
 
@@ -157,7 +161,7 @@ export default function EditUser() {
                                 Update
 
                             </button>}
-                            <input type="button" value="Cancel"
+                            <input type="button" value="Cancel" onClick={()=>navigate(-1)}
                                    className="text-black p-3 rounded-md border border-black"/>
                         </div>
                     </section>
