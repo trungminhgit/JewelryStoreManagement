@@ -118,7 +118,7 @@ export default function AddUser() {
                         </div>
                         <div className="mb-4 flex gap-4">
                             <button onClick={register}
-                                    className="bg-purple-400 text-white px-4 py-2 rounded-md">Sign in
+                                    className="bg-purple-400 text-white px-4 py-2 rounded-md">Create
                             </button>
                             <button
                                 onClick={() => history.back()}

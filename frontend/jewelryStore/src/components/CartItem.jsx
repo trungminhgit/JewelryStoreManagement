@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import {cartContext} from "../helper/Context.js";
 
-export default function CartItem({id,name, price, type, quantity}) {
+export default function CartItem({id,name, price, type, quantity, imageUrl}) {
     const {cartDispatch} = useContext(cartContext)
     const [_quantity, setQuantity] = useState(quantity);
     const addToCart = (id) => {
@@ -47,7 +47,7 @@ export default function CartItem({id,name, price, type, quantity}) {
             <div className="flex justify-between mb-5">
                 <div className="flex gap-5">
                     <div className="w-[35%]">
-                        <img src="../../public/ring.png" alt="image"/>
+                        <img src={imageUrl} className="aspect-square" alt="image"/>
                     </div>
                     <section>
                         <h3 className="text-xl md:text-sm lg:text-lg">{name}</h3>

@@ -218,7 +218,6 @@ export default function Statistic() {
         style: {
             data:{
                 stroke: "#333",
-
             }
         },
         data:[
@@ -236,6 +235,7 @@ export default function Statistic() {
 
 
     }
+    console.log("quarter 3",revenueQuarter3)
     useEffect(() => {
         setYear(currentDate.getFullYear())
         let year = currentDate.getFullYear()
@@ -253,9 +253,13 @@ export default function Statistic() {
             return weekNumber;
         }
         const week = getWeekOfMonth(currentDate);
+        console.log("year",year)
+        console.log("month",month)
+        console.log("quarter",quarter)
+        console.log("week",week)
         fetchRevenueYear(year)
         fetchRevenueQuarter1(quarter,year)
-        fetchRevenueMonth(month,year)
+        fetchRevenueMonth1(month,year)
         fetchRevenueWeek(week,year)
     }, [])
 

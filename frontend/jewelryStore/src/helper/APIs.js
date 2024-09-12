@@ -38,4 +38,6 @@ export const endpoints = {
     "revenue-by-quarter": (quarter, year)=>`/revenue/quarter?quarter=${quarter}&year=${year}`,
     "revenue-by-month": (month, year)=>`/revenue/month?month=${month}&year=${year}`,
     "revenue-by-week": (week, year)=>`/revenue/week?week=${week}&year=${year}`,
+    "receipts":"/sale/add-receipt",
+    "vn-pay":(amount)=>`/payment/vn-pay?amount=${amount}`
 }

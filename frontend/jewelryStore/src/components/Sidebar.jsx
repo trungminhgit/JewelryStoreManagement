@@ -63,7 +63,7 @@ export default function Sidebar() {
                     <ul className="space-y-3 font-medium">
 
                         <li>
-                            <a href="#"
+                            <div  onClick={()=>navigate("/")}
                                className="flex items-center p-2 bg-yellow-100 text-black rounded-r-[50px] hover:bg-yellow-200 group">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -76,10 +76,10 @@ export default function Sidebar() {
                                 </svg>
 
                                 <span className="ms-3">Dashboard</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"
+                            <div onClick={()=>navigate("/users/")}
                                className="flex items-center p-2 bg-yellow-100 text-black rounded-r-[50px] hover:bg-yellow-200 group">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -89,10 +89,10 @@ export default function Sidebar() {
                                 </svg>
 
                                 <span className=" ms-3 whitespace-nowrap">Users</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"
+                            <div
                                className="flex items-center p-2 bg-yellow-100 text-black rounded-r-[50px] hover:bg-yellow-200 group">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -103,10 +103,10 @@ export default function Sidebar() {
 
 
                                 <span className=" ms-3 whitespace-nowrap">Payment</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"
+                            <div onClick={()=>navigate("/products/")}
                                className="flex items-center p-2 text-black bg-yellow-100 rounded-r-[50px] hover:bg-yellow-200 group">
                                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -115,13 +115,11 @@ export default function Sidebar() {
                                           strokeWidth="2"
                                           d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
                                 </svg>
-
-
                                 <span className=" ms-3 whitespace-nowrap">Products</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"
+                            <div onClick={()=>navigate("/statistics/")}
                                className="bg-yellow-100 flex items-center p-2 text-black rounded-r-[50px] hover:bg-yellow-200 group">
                                 <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -133,7 +131,7 @@ export default function Sidebar() {
 
 
                                 <span className=" ms-3 whitespace-nowrap">Statistics</span>
-                            </a>
+                            </div>
                         </li>
                         <li onClick={() => setIsOpen(!isOpen)}
                             className="flex justify-between items-center bg-yellow-100 rounded-r-[50px] relative cursor-pointer hover:bg-yellow-200 p-2 rounded-lg">

@@ -34,13 +34,17 @@ export default function addProduct() {
             // console.log(response.data)
             const token = Cookies.get("token")
             console.log(token)
-        setLoading(true)
+            setLoading(true)
             const response = await authApi(token).post(endpoints["product-add"], data,{
                 headers:{
                     "Content-Type":'multipart/form-data'
                 }
             })
         console.log(response)
+        if(response.data.status!==201){
+            setLoading(false)
+            toast.error(response.data.message)
+        }
             if(response.data.status===201){
                 setLoading(false)
                 console.log(response.data)
@@ -165,7 +169,7 @@ export default function addProduct() {
                                 </div>
                             </div>}
                             {!loading && <button onClick={add}
-                                                 className="bg-purple-400 text-white px-4 py-2 rounded-md">Sign in
+                                                 className="bg-purple-400 text-white px-4 py-2 rounded-md">Create
                             </button>}
                             <button
                                 onClick={() => history.back()}
