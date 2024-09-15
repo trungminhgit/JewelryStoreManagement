@@ -19,6 +19,13 @@ export default function DetailProduct2() {
             setProduct(response.data.data)
         }
     }
+    const [comments, setComments]=useState([]);
+    const fetchComments = async (id) => {
+        const token = Cookies.get("token");
+        const response = await authApi(token).get(endpoints["comments"](id));
+        console.log("comments________",response.data)
+        setComments(response.data.data)
+    }
     const {cartDispatch} = useContext(cartContext);
     const addToCart = (id) => {
 
@@ -61,8 +68,24 @@ export default function DetailProduct2() {
     useEffect(()=>{
         console.log(id)
         fetchProduct(id)
+        fetchComments(id)
     },[])
 
+    const [comment, setComment] = useState("")
+
+    const addComment = async (id) => {
+        const token = Cookies.get("token")
+        console.log(token)
+        const data = {
+            description:comment
+        }
+        const response = await authApi(token).post(endpoints["comment"](id), data)
+        if(response.data.status===201){
+            fetchComments(id)
+            setComment("")
+
+        }
+    }
     return (
         <>
             <ToastContainer position="top-right"/>
@@ -94,6 +117,29 @@ export default function DetailProduct2() {
                             <button className="mt-10 px-4 py-2 bg-yellow-300 rounded-md" onClick={()=>navigate("/cart")}>Mua</button>
                         </section>
                     </section>}
+
+                    <section className="mt-4">
+                        <div className="mb-4"><span className="inline-block py-1 px-4 text-white bg-purple-400">Comments</span></div>
+                        <div className="mb-4 flex gap-3">
+                            <input type="text" className="w-full p-3 rounded-md" placeholder="add comment" value={comment}
+                            onChange={(e)=>setComment(e.target.value)}
+                            />
+                            <button className="bg-yellow-300 p-3"
+                                    onClick={()=>
+                                    {
+                                        addComment(product.productID)
+                                    }
+                            }>Comment</button>
+                        </div>
+                        {comments && comments.map(comment=> {
+                            return (
+                                <div key={comment.id} className="mb-4">
+                                    <div className="mb-1 text-xl">{comment.description}</div>
+                                    <div className="text-sm">{comment.createDate}</div>
+                                </div>
+                            )
+                        })}
+                    </section>
             </section>
             <Footer/>
 
