@@ -12,8 +12,12 @@ import com.dtm.jewelrystore.service.PaymentService;
 import com.dtm.jewelrystore.service.SaleService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -38,14 +42,23 @@ public class PaymentController {
     public ResponseData<PaymentResponse> pay(HttpServletRequest request) {
         return new ResponseData<>(HttpStatus.OK.value(), "Pay successfully", paymentService.createPaymentVNPAY(request));
     }
-
+    
     @GetMapping("vn-pay-callback")
-    public ResponseData<?> payCallback(HttpServletRequest request) {
+    public ResponseData<?> payCallBack(HttpServletRequest request, HttpServletResponse response){
         String status = request.getParameter("vnp_ResponseCode");
-        if (status.equals("00")) {
-            return new ResponseData<>(HttpStatus.OK.value(),"Payment successfully ");
-        } else {
-            return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Payment failed");
+        if(status.equals("00")){
+            try{
+                response.sendRedirect("http://localhost:5173/cart?status=success");
+            }catch(IOException ex){
+                Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try{
+                response.sendRedirect("http://localhost:5173/cart?status=fail");
+            }catch(IOException ex){
+                Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return null;
     }
 }
