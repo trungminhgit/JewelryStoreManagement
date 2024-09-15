@@ -30,7 +30,6 @@ export const endpoints = {
     "products":(pageNo)=>"/product/list-product?pageNo="+pageNo,
     "product-add":"product/add-product",
     "product":(id)=>"/product/"+id,
-    "comments":(productId)=>"/product/comments/"+productId,
     "comment-add":(productId)=>"/product/add-comment/"+productId,
     "user-search":(keyword) => `/user/search?firstName=${keyword}`,
     "product-search":(keyword) => `/product/search-product?productName=${keyword}`,
@@ -40,5 +39,7 @@ export const endpoints = {
     "revenue-by-week": (week, year)=>`/revenue/week?week=${week}&year=${year}`,
     "receipts":"/sale/add-receipt",
     "vn-pay":(amount)=>`/payment/vn-pay?amount=${amount}`,
-    "vn-pay-callback":`http://localhost:8080/api/payment/`
+    "vn-pay-callback":`http://localhost:8080/api/payment/`,
+    "comment":(id)=>`/product/add-comment/${id}`,
+    "comments":(productId)=>"/product/comments/"+productId,
 }
