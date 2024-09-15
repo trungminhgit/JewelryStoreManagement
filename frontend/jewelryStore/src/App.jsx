@@ -51,7 +51,7 @@ function App() {
             <Route path="products/:id" element={<EditProduct/>}/>
             <Route path="/statistics" element={<Statistic/>}/>
             <Route path="/register" element={<Register/>}/>
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/login" index element={<Login/>}/>
           </Routes>
         </BrowserRouter>
           </cartContext.Provider>
