@@ -6,7 +6,6 @@ export default function CardProduct({id=null,name, subname, description, imageUr
     const {cart ,cartDispatch} = useContext(cartContext);
     console.log(cart);
     const addToCart = (id) => {
-        let hasSucess = false;
         toast.success("Add successfully", {onClose:()=>{
                 cartDispatch({
                     type:"add",
@@ -14,7 +13,6 @@ export default function CardProduct({id=null,name, subname, description, imageUr
                         id:id
                     }
                 })
-                hasSucess=true
             }, onClick:()=>{
                 cartDispatch({
                     type:"add",
@@ -22,16 +20,7 @@ export default function CardProduct({id=null,name, subname, description, imageUr
                         id:id
                     }
                 })
-                hasSucess=true
             }})
-        if(hasSucess===false){
-            cartDispatch({
-                type:"add",
-                payload:{
-                    id:id
-                }
-            })
-        }
     }
     const subtractToCart = (id) => {
         toast.success("Subtract successfully",{ onClose:()=>{

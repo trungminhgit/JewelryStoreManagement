@@ -39,5 +39,6 @@ export const endpoints = {
     "revenue-by-month": (month, year)=>`/revenue/month?month=${month}&year=${year}`,
     "revenue-by-week": (week, year)=>`/revenue/week?week=${week}&year=${year}`,
     "receipts":"/sale/add-receipt",
-    "vn-pay":(amount)=>`/payment/vn-pay?amount=${amount}`
+    "vn-pay":(amount)=>`/payment/vn-pay?amount=${amount}`,
+    "vn-pay-callback":`http://localhost:8080/api/payment/`
 }

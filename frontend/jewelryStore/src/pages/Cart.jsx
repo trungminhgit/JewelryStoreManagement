@@ -4,9 +4,13 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import Cookies from "js-cookie";
 import {cartContext} from "../helper/Context.js";
 import {authApi, endpoints} from "../helper/APIs.js";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
 
 export default function Cart() {
+
+
+
     const {cart, cartDispatch} = useContext(cartContext);
     const [products, setProducts] = useState([])
     const dataFetchedRef = useRef(false);
@@ -77,14 +81,26 @@ export default function Cart() {
                 const _response = await authApi(token).get(endpoints['vn-pay'](total))
                 console.log("response vn pay",_response.data.data.paymentUrl)
                 setLoading(false)
-                window.location.href=_response.data.data.paymentUrl
+                console.log(_response.data.data.paymentUrl)
+                window.open(_response.data.data.paymentUrl, "_blank")
             }
         }
     }
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const status = queryParams.get('status');
+        status&&toast.success("Payment successfully!");
+    }, []);
+
+
+
 
 
     return (
         <>
+            <ToastContainer position="top-right"/>
             <NavBar />
             <section className="md:mx-auto w-full md:p-0 md:w-[80%]">
                 <h3 className="mb-12 mt-7 text-4xl ml-4 lg:ml-0">Cart page</h3>
