@@ -1,4 +1,4 @@
-export default function CardSpecialProduct({name, subname}) {
+export default function CardSpecialProduct({name, subname, imgUrl}) {
     return (
         <>
             <div className="flex flex-col">
@@ -7,7 +7,7 @@ export default function CardSpecialProduct({name, subname}) {
                     <p className="text-2xl">{subname}</p>
                 </div>
                 <div className="">
-                    <img src="../../public/ring.png" alt="image"/>
+                    <img src={imgUrl} className="aspect-square object-cover size-fit" alt="image"/>
                 </div>
             </div>
         </>
