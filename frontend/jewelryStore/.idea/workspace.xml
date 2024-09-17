@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72912dd8-cda6-4e61-849a-4ca8d9f3fb52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/configuration/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/java/com/dtm/jewelrystore/configuration/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Backend/jewelrystore/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/APIs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/APIs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Cart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/DetailProduct2.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/DetailProduct2.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/EditProduct.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/EditProduct.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

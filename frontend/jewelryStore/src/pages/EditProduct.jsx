@@ -62,11 +62,15 @@ export default function EditProduct() {
         }).catch(err=>{
             console.log(err)
         });
-        if(response.data.status!==202){
+        console.log(response)
+        if(response&&response.data.status!==202){
             setLoading(false)
             toast.error(response.data.message)
         }
-        if(response.data.status===202){
+        if (response===undefined){
+            toast.error("Update failed")
+        }
+        if(response&&response.data.status===202){
             setLoading(false)
             console.log("response",response.data)
             productDispatch({

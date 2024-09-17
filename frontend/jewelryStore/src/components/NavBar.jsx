@@ -27,6 +27,16 @@ export default function NavBar() {
         fetchCurrentUser()
     }, [cart])
 
+    const [open, setOpen] = useState(false)
+
+    const logout = () =>{
+        Cookies.remove("token")
+
+        setUserName("")
+        navigate("/client")
+        setOpen(false)
+
+    }
     return (
         <>
             <header className="bg-yellow-100">
@@ -39,7 +49,7 @@ export default function NavBar() {
                         <li className="cursor-pointer hover:text-gray-800" onClick={()=>navigate("/products-client")}>Product</li>
                         <li className="cursor-pointer hover:text-gray-800" onClick={()=>navigate("/cart")}>Payment</li>
                     </ul>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 relative">
                         <div className="relative cursor-pointer" onClick={()=>navigate("/cart")}>
                             <svg className="size-12 text-gray-800 dark:text-white" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -50,18 +60,23 @@ export default function NavBar() {
                             </svg>
                             <span className="text-2xl absolute -bottom-[10px] -right-[5px]">{total}</span>
                         </div>
-                        {!user &&
-                            <div onClick={() => navigate("/login")}>
-                                <svg className="size-12 text-gray-800 dark:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-width="2"
-                                          d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                </svg>
+                        {!userName &&
+                            <div onClick={() => navigate("/login")} className="flex gap-3 text-xl items-center cursor-pointer">
+                                Log in
                             </div>
                         }
                         {userName&&
-                            <div className="size-12 flex items-center text-lg ml-4">{userName}</div>
+                            (
+                                <>
+                                    <div onClick={()=>{setOpen(!open)}} className="size-12 cursor-pointer flex items-center text-lg ml-4">{userName}</div>
+                                    {open &&
+                                        <div className="absolute -bottom-[100%] w-full bg-white">
+                                            <div className="text-lg text-right px-3 py-1 w-full cursor-pointer hover:bg-gray-100" onClick={logout}>Log out
+                                            </div>
+                                        </div>
+                                    }
+                                </>
+                            )
                         }
 
 
