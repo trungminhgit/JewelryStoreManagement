@@ -140,7 +140,7 @@ export default function Sidebar() {
                                      alt="Rounded avatar"/>
                                 <section className="text-left">
                                     <h4 className="text-md">{userName}</h4>
-                                    {!userName && <h4 className="text-md">None</h4>}
+                                    {!userName && <h4 className="text-md">None User</h4>}
                                 </section>
                             </section>
                             <div>
@@ -185,7 +185,49 @@ export default function Sidebar() {
                                         </a>
                                     </li>
                                 </ul>
+
                             }
+                            {isOpen && !userName&&
+                                (
+                                    <ul
+                                        className="mt-1 absolute p-2 pl-0 left-0 right-0 top-full w-full bg-white shadow-lg rounded-sm">
+                                        <li onClick={() => {
+                                            navigate("/login")
+                                        }} className="mb-1">
+                                            <div className="px-2 py-1 hover:bg-gray-100 flex gap-3">
+                                                <svg className="w-6 h-6 text-gray-800 dark:text-white"
+                                                     aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round"
+                                                          strokeLinejoin="round"
+                                                          strokeWidth="2"
+                                                          d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+                                                </svg>
+
+
+                                                Log in
+                                            </div>
+                                        </li>
+                                        <li className="mb-1" onClick={() => navigate("/register")}>
+                                            <div
+                                                className="px-2 py-1 hover:bg-gray-100 flex gap-3">
+                                                <svg className="w-6 h-6 text-gray-800 dark:text-white"
+                                                     aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round"
+                                                          strokeLinejoin="round"
+                                                          strokeWidth="2"
+                                                          d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+                                                </svg>
+                                                Register
+                                            </div>
+                                        </li>
+                                    </ul>
+                                )}
                         </li>
                     </ul>
                 </div>

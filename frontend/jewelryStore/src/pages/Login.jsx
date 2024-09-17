@@ -27,7 +27,7 @@ export default function Login() {
                     user:username
                 }
             })
-            navigate("/");
+            navigate(-1);
         }else{
             toast.error("Invalid password")
         }

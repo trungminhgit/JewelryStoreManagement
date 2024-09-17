@@ -82,7 +82,11 @@ export default function Cart() {
                 console.log("response vn pay",_response.data.data.paymentUrl)
                 setLoading(false)
                 console.log(_response.data.data.paymentUrl)
-                window.open(_response.data.data.paymentUrl, "_blank")
+                setTimeout(()=>{
+                    window.open(_response.data.data.paymentUrl, "_blank")
+                    // window.location.href=_response.data.data.paymentUrl
+
+                },500)
             }
         }
     }
